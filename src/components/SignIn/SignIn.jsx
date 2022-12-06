@@ -86,7 +86,7 @@ const SignIn = () => {
     const { user } = await signInWithGooglePopup();
     // setCurrentUser(user);
     await createUserDoc(user);
-    toast.success(`Welcome ${currentUser?.email}`, {
+    toast.success(`Welcome ${user?.email}`, {
       position: "top-right",
       autoClose: 2000,
       hideProgressBar: false,
