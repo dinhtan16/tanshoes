@@ -15,8 +15,9 @@ import DetailProduct from './components/detailproduct/DetailProduct';
 import ScrollToTop from "react-scroll-to-top";
 import Billing from './components/billing/Billing';
 function App() {
-  
+  document.title='Tanshoes'
   return <div className="App">
+    
     <>
     <ScrollToTop smooth color="#6f00ff" />
       <Routes>
