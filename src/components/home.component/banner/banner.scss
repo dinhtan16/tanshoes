@@ -1,0 +1,26 @@
+.btn-info{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction:column;
+    gap:20px;
+ }
+.btn-shop{
+    align-items: center;
+    background-color: #fff;
+    color: #000000;
+    display: flex;
+    width: 185px;
+    padding: 20px;
+    gap: 10px;
+    
+}
+.secs{
+    width: 155px;
+}
+.bgr-banner{
+    background-image: url('../../../assets/banner.jpg');
+    background-position: 69%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    // padding: 60px;
+}
