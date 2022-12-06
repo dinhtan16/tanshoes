@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import "./navigate.scss";
 import { useNavigate } from "react-router-dom";
 import { NavLink, Outlet } from "react-router-dom";
@@ -14,8 +14,7 @@ import Search from "../../components/single-dom/search/Search";
 
 import { FaBars } from "react-icons/fa";
 import { AiOutlineUser, AiOutlineLogout } from "react-icons/ai";
-import { MdKeyboardArrowDown } from "react-icons/md";
-import { BiHeart, BiLogInCircle } from "react-icons/bi";
+import { BiLogInCircle } from "react-icons/bi";
 import { CgAdidas } from "react-icons/cg";
 
 import TextTransition, { presets } from "react-text-transition";
@@ -66,9 +65,13 @@ const TEXTS = [
 const Navigate = () => {
   const { currentUser } = useContext(userContext);
   const { setCartItems } = useContext(CartContext);
+  const { isOpen } = useContext(CartContext);
+
+  const barRef = useRef(null);
+  const navMobile = useRef(null);
+
 
   const navigate = useNavigate();
-  const { isOpen } = useContext(CartContext);
   const signOutHandler = async () => {
     await signOutUser();
     //  setCurrentUser(null)
@@ -98,7 +101,9 @@ const Navigate = () => {
     if (window !== undefined) {
       let windowHeight = window.scrollY;
       windowHeight > 80
-        ? setStickyClass("fixed top-0 left-0 z-50  right-0 w-full px-4 bg-white")
+        ? setStickyClass(
+            "fixed top-0 left-0 z-50  right-0 w-full px-4 bg-white"
+          )
         : setStickyClass("relative");
     }
   };
@@ -112,8 +117,45 @@ const Navigate = () => {
     );
     return () => clearTimeout(intervalId);
   }, []);
+
+  //handleNav
+  const showNavbar = () => {
+    navMobile.current.classList.toggle('active')
+  }
+  const closeNav = () => {
+    navMobile.current.classList.remove('active')
+  }
+  
   return (
     <>
+      {
+        <div ref={navMobile} className='nav-mobile'>
+           <div className="relative nav-link__mobile h-full flex flex-col gap-8 items-center font-extrabold justify-center mx-auto">
+        <Search />
+        {Links.map(({ to, id, name }) => (
+          <NavLink
+            onClick={closeNav}
+            to={to}
+            key={id}
+            className={(navData) =>
+              navData.isActive
+                ? "text-red-500 uppercase"
+                : "text-black hover:text-red-500 uppercase"
+            }
+          >
+            {name}
+          </NavLink>
+        ))}
+        <div
+          
+          className="underline font-light active:bg-sky-200 mt-2"
+          onClick={closeNav}
+        >
+          Close
+        </div>
+      </div>
+        </div>
+      }
       <div className="bg-black w-full  text-white justify-center flex items-center h-30px py-2 font-light">
         <div className="cursor-pointer">
           <TextTransition springConfig={presets.molasses}>
@@ -145,63 +187,66 @@ const Navigate = () => {
               </NavLink>
             ))}
           </div>
-        <div className="actions">
-          <div className="search">
-            {" "}
-            <Search />
-          </div>
+          <div className="actions">
+            <div className="search">
+              {" "}
+              <Search />
+            </div>
 
-          {currentUser ? (
-            <>
+            {currentUser ? (
+              <>
+                <NavLink
+                  to="/user"
+                  className="uppercase hover:text-red-500"
+                  data-tip="Your account"
+                  data-place="bottom"
+                >
+                  <ReactTooltip />
+
+                  <span className="text-2xl">
+                    {" "}
+                    <AiOutlineUser />
+                  </span>
+                  {/* {localStorage.getItem('users')} */}
+                </NavLink>
+                <button
+                  onClick={signOutHandler}
+                  className="uppercase hover:text-red-500"
+                  data-tip="Log out"
+                  data-place="bottom"
+                >
+                  <ReactTooltip />
+                  <span className="text-2xl">
+                    {" "}
+                    <AiOutlineLogout />
+                  </span>
+                </button>
+              </>
+            ) : (
               <NavLink
-                to="/user"
+                to="/account"
                 className="uppercase hover:text-red-500"
-                data-tip="Your account"
+                data-tip="Sign In"
                 data-place="bottom"
               >
                 <ReactTooltip />
-
                 <span className="text-2xl">
-                  {" "}
-                  <AiOutlineUser />
+                  <BiLogInCircle />
                 </span>
-                {/* {localStorage.getItem('users')} */}
               </NavLink>
-              <button
-                onClick={signOutHandler}
-                className="uppercase hover:text-red-500"
-                data-tip="Log out"
-                data-place="bottom"
-              >
-                <ReactTooltip />
-                <span className="text-2xl">
-                  {" "}
-                  <AiOutlineLogout />
-                </span>
-              </button>
-            </>
-          ) : (
-            <NavLink
-              to="/account"
-              className="uppercase hover:text-red-500"
-              data-tip="Sign In"
-              data-place="bottom"
-            >
-              <ReactTooltip />
-              <span className="text-2xl">
-                <BiLogInCircle />
-              </span>
-            </NavLink>
-          )}
+            )}
 
-          <button>
-            <CartIcon />
-          </button>
-          <div className="nav-toggle">
-            {" "}
-            <FaBars />
+            <button>
+              <CartIcon />
+            </button>
+            <div className="nav-toggle" ref={barRef} onClick={showNavbar}>
+              {" "}
+              <span className="text-3xl">
+                {" "}
+                <FaBars />
+              </span>
+            </div>
           </div>
-        </div>        
         </div>
         {isOpen && <CartDropdown />}
       </div>

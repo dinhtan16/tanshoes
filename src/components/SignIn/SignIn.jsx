@@ -100,7 +100,7 @@ const SignIn = () => {
     <>
       <div className="mx-auto max-w-[1200px] grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 sign-in">
         <div>
-          <form onSubmit={handleSubmitLogin} className="mt-8 sign-in__form">
+          <form onSubmit={handleSubmitLogin} className="mt-8 sign-in__form px-4">
             <h1 className="text-3xl font-extrabold text-left uppercase title__form">
               log in
             </h1>

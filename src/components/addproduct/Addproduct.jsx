@@ -54,7 +54,7 @@ export const AddProducts = () => {
     await setDoc(doc(collection(db, "Products")), {
       ProductName: productName,
       ProductPrice: Number(productPrice),
-      ProductImg: [...img],
+      ProductImg: img,
       ProductSize: sizeCheck,
       ProductDescription: productDes,
       Categories: categories,
@@ -119,7 +119,7 @@ export const AddProducts = () => {
         <input
           type="text"
           className="form-control"
-          required
+          
           onChange={(e) => setProductName(e.target.value)}
           value={productName}
         />
@@ -128,7 +128,7 @@ export const AddProducts = () => {
         <input
           type="text"
           className="form-control"
-          required
+          
           onChange={(e) => setHighlight(e.target.value)}
           value={highlight}
         />
@@ -137,7 +137,7 @@ export const AddProducts = () => {
         <input
           type="text"
           className="form-control"
-          required
+          
           onChange={(e) => setProductDescription(e.target.value)}
           value={productDes}
         />
@@ -159,7 +159,7 @@ export const AddProducts = () => {
         <input
           type="text"
           className="form-control"
-          required
+          
           onChange={(e) => setCategories(e.target.value)}
           value={categories}
         />
@@ -167,7 +167,7 @@ export const AddProducts = () => {
         <input
           type="text"
           className="form-control"
-          required
+          
           onChange={(e) => setColor(e.target.value)}
           value={color}
         />
@@ -195,7 +195,7 @@ export const AddProducts = () => {
         <input
           type="number"
           className="form-control"
-          required
+          
           onChange={(e) => setProductPrice(e.target.value)}
           value={productPrice}
         />
@@ -205,7 +205,7 @@ export const AddProducts = () => {
           type="file"
           className="form-control"
           id="file"
-          required
+          
           onChange={productImgHandler}
         />
         <br />

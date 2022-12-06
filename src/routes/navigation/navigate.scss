@@ -31,10 +31,29 @@
         .nav-toggle{
             display: block;
         }
+        .search{
+            display: none;
+        }
     }
         
    
 }
 .nav-toggle{
     display: none;
+}
+.nav-mobile{
+    position: fixed;
+    top: 0;
+    height: 100%;
+    padding:  0 24px;
+    z-index: 10;
+    max-width: 250px;
+    background-color: white;
+    left: 0;
+    transform: translateX(-250px);
+    transition: linear .2s;
+
+}
+.active{
+    transform: translateX(0);
 }

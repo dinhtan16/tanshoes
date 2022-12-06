@@ -23,12 +23,12 @@ const ProductCard = ( {item} ) => {
 
   return (
     <>
-      <div className="mx-auto text-left product-body relative h-[500px]  md:w-[200px] lg:w-full w-full">
+      <div className=" text-left product-body relative h-[500px] md:max-w-[280px] w-full">
         <div className="relative overflow-hidden product-body-top">
           <img
             src={Ava}
             alt=""
-            className="h-[300px] hover:scale-110 transition-all"
+            className="lg:h-[300px] hover:scale-110 transition-all"
           />
           <div className="product-price w-auto absolute bottom-0 text-xs  text-left px-2 py-1 left-2 bg-white text-black font-light">
             {ProductPrice}$
@@ -84,7 +84,7 @@ const ProductCard = ( {item} ) => {
             {selectedSize ? (
                 <button
                   className="bg-black text-white w-[100px] h-[40px]
-                    mb-4 font-light text-[12px] uppercase lg:mt-2 md:mt-4 mt-2
+                    mb-4 font-light text-[12px] uppercase lg:mt-2 md:mt-4 mt-4
                     hover:bg-white hover:text-black transition-all hover:border hover:border-black
                     "
                   onClick={addProductToCart}
@@ -94,7 +94,7 @@ const ProductCard = ( {item} ) => {
               ) : (
                 <button
                   className="bg-black text-white w-[100px] h-[40px]
-                    mb-4 font-light text-[12px] uppercase lg:mt-2 md:mt-4 mt-2
+                    mb-4 font-light text-[12px] uppercase lg:mt-2 md:mt-4 mt-4
                     hover:bg-white hover:text-black transition-all hover:border hover:border-black
                     "
                   onClick={handleSizeAlert}

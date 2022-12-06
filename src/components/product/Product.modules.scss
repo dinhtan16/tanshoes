@@ -4,3 +4,9 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+@media screen and (max-width:500px) {
+    .product-body {
+      height: 520px;
+    }
+}

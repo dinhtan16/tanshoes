@@ -3,7 +3,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 const Search = () => {
   return (
     <div>
-      <div class="">
+      <div>
         <div class=" flex justify-center items-center">
           <div class="relative">
             <input

@@ -98,7 +98,7 @@ const Signup = () => {
   return (
     <>
       <div className="mx-auto max-w-[1200px] grid lg:grid-cols-2 grid-cols-1 sign-up">
-        <form onSubmit={handleSubmit} className="mt-8 sign-up__form">
+        <form onSubmit={handleSubmit} className="mt-8 sign-up__form px-4">
           <h1 className="text-3xl text-left uppercase font-extrabold">
             register
           </h1>
