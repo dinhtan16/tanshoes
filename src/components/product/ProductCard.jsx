@@ -23,7 +23,7 @@ const ProductCard = ( {item} ) => {
 
   return (
     <>
-      <div className=" text-left product-body relative h-[500px] md:max-w-[280px] w-full">
+      <div className=" text-left product-body relative md:max-w-[280px] w-full">
         <div className="relative overflow-hidden product-body-top">
           <img
             src={Ava}
@@ -49,8 +49,8 @@ const ProductCard = ( {item} ) => {
           </div>
         
         </div>
-      <div className="flex items-center">
-          <div className="flex gap-4 md:flex-wrap mt-4">
+      <div className="flex mt-4 flex-col lg:flex-row md:flex-col">
+          <div className="flex gap-4 md:flex-wrap">
             {ProductSize.map((item, i) => {
               return (
                 <div
@@ -80,10 +80,10 @@ const ProductCard = ( {item} ) => {
               );
             })}
           </div>
-        <div className="btn  flex-shrink-0 absolute bottom-0">
+        <div className="btn  flex-shrink-0">
             {selectedSize ? (
                 <button
-                  className="bg-black text-white w-[100px] h-[40px]
+                  className=" bg-black text-white w-[100px] h-[40px]
                     mb-4 font-light text-[12px] uppercase lg:mt-2 md:mt-4 mt-4
                     hover:bg-white hover:text-black transition-all hover:border hover:border-black
                     "
