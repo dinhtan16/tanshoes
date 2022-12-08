@@ -66,11 +66,11 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center flex-shrink-0
+      <div className=" policy-footer grid grid-cols-2 gap-4 lg:flex justify-center md:grid-cols-2
       bg-gray-900 text-white py-4 font-light mt-8 text-center">
-        <span><a href="https://www.adidas.com.vn/en/privacy_policy" className=" pr-6 text-white font-light text-[12px]"> Privacy and policy</a></span>
-       <span> <Link to ='/' className=" pr-6 text-white font-light text-[12px]">Terms and Conditions</Link></span>
-        <span><Link to ='/' className=" pr-6 text-white font-light text-[12px]">Imprint</Link></span>
+        <span><a href="https://www.adidas.com.vn/en/privacy_policy" className=" pr-6 text-white font-light"> Privacy and policy</a></span>
+       <span> <Link to ='/' className=" pr-6 text-white font-light">Terms and Conditions</Link></span>
+        <span><Link to ='/' className=" pr-6 text-white font-light">Imprint</Link></span>
     <span className="select-none">  © 2020 dinhtan Vietnam Company Limited</span>
       </div>
     </>

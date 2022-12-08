@@ -3,7 +3,7 @@ import { useContext,useState } from "react";
 import { useParams,useNavigate } from "react-router-dom";
 import { ProductsContext } from "../../context/ProductsContext";
 import { CartContext } from "../../context/CartContext";
-
+import './productcate.scss'
 import {toast} from 'react-toastify'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
@@ -62,7 +62,7 @@ const DetailProduct = () => {
   }
   return (
     <>
-      <div className="flex mx-auto px-4 mt-8 gap-4">
+      <div className="flex mx-auto px-4 mt-8 gap-4 md:flex-col flex-col lg:flex-row md:justify-center justify-center md:items-center items-center lg:items-start">
         <div className="product-img w-[65%]">
           <Swiper navigation={true} modules={[Navigation]} className='max-w-[100%]'>
             {ProductImg.map((item, i) => {
@@ -103,7 +103,7 @@ const DetailProduct = () => {
         </div>
         <div className="product-info flex-1 w-full">
           <div className="categories">{Categories}</div>
-          <div className="product-name">{ProductName}</div>
+          <div className="product-name_detail">{ProductName}</div>
           <div className="product-price">{ ProductPrice}$</div>
           <div className="product-color">{Productcolor}</div>
           <div className="product-size ">
@@ -112,7 +112,7 @@ const DetailProduct = () => {
               {ProductSize.map((item, i) => (
                 <button
                   key={i}
-                  className="border border-black p-3 cursor-pointer hover:bg-black hover:text-white transition"
+                  className="border border-black p-3 cursor-pointer hover:bg-black flex items-center hover:text-white transition"
                   onClick={() => {
                     setSelectedSize(item);
                     toast.success(`Selected`, {
@@ -130,7 +130,7 @@ const DetailProduct = () => {
             </div>
             <div className="size-guide_link">Size guide</div>
           </div>
-          <div className="btn-add flex">
+          <div className="btn-add flex md:max-w-[500px] max-w-[400px] lg:w-full">
             {selectedSize ? (
            
                 <button
@@ -167,7 +167,7 @@ const DetailProduct = () => {
           <div className="btn-later">
             <button
             onClick={handleBuy}
-              className="border mt-2 border-black h-[50px] w-full uppercase hover:ring-1 hover:border-transparent
+              className="md:max-w-[500px] max-w-[500px] lg:w-full border mt-2 border-black h-[50px] w-full uppercase hover:ring-1 hover:border-transparent
             tracking-normal font-bold px-5 py-3"
             >
               BUY NOW
