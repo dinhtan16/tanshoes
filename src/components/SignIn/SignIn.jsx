@@ -1,8 +1,7 @@
 import React from "react";
-import { useContext, useState } from "react";
+import {useState } from "react";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
-import { userContext } from "../../context/UserContext";
 
 import { FcGoogle } from "react-icons/fc";
 import { AiOutlineCheckCircle } from "react-icons/ai";
@@ -21,7 +20,6 @@ import { Banner } from "../single-dom/banner";
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const { currentUser } = useContext(userContext);
   const formFieldInit = {
     email: "",
     password: "",
@@ -101,7 +99,7 @@ const SignIn = () => {
       <div className="mx-auto max-w-[1200px] grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 sign-in">
         <div>
           <form onSubmit={handleSubmitLogin} className="mt-8 sign-in__form px-4">
-            <h1 className="text-3xl font-extrabold text-left uppercase title__form">
+            <h1 className="text-4xl font-extrabold text-left uppercase title__form">
               log in
             </h1>
             <div className="m-0 p-0 text-left underline">

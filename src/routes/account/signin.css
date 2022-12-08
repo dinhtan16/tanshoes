@@ -33,6 +33,11 @@ input {
 	padding: 12px 15px;
 	margin: 8px 0;
 	width: 100%;
+	height:50px;
+}
+button{
+	height:40px;
+
 }
 
 

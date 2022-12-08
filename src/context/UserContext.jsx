@@ -1,33 +1,58 @@
-import React,{useState,createContext,useEffect} from 'react'
+import React, {  createContext, useEffect, useReducer } from "react";
 
-import {  createUserDoc, onAuthStateChangeListener } from '../utils/firebase/firebase'
+import {
+  createUserDoc,
+  onAuthStateChangeListener,
+} from "../utils/firebase/firebase";
 
 export const userContext = createContext({
-    currentUser :null,
-    setCurrentUser:() => null,
-})
+  currentUser: null,
+  setCurrentUser: () => null,
+});
 
-const UserProvider = ({children}) => {
+export const USER_ACTION_TYPE = {
+  SET_CURRENT_USER: "SET_CURRENT_USER",
+};
 
+const userReducer = (state, action) => {
+  const { type, payload } = action;
 
-    const [currentUser, setCurrentUser] = useState(null)
-    const value ={currentUser,setCurrentUser}
+  switch (type) {
+    case USER_ACTION_TYPE.SET_CURRENT_USER:
+      return {
+        ...state,
+        action: payload,
+      };
 
-useEffect(() => {
-    const unsub = onAuthStateChangeListener((user) => {
-        if(user){
-          createUserDoc(user) 
-          // console.log(user.email)
-          // localStorage.setItem('users',user)
-        }
-        return setCurrentUser(user)
-    })
-    return unsub
-},[])
-
-  return (
-    <userContext.Provider value={value}>{children}</userContext.Provider>
-  )
+    default:
+      throw new Error('')
+  }
+};
+const INIT_STATE = {
+  currentUser:null
 }
+const UserProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(userReducer,INIT_STATE);
+  const {currentUser} =state
+  const setCurrentUser =  (user) => {
+    dispatch({type:USER_ACTION_TYPE.SET_CURRENT_USER,payload:user})
+  }
 
-export default UserProvider
+  const value = { currentUser, setCurrentUser };
+
+  useEffect(() => {
+    const unsub = onAuthStateChangeListener((user) => {
+      if (user) {
+        createUserDoc(user);
+        // console.log(user.email)
+        // localStorage.setItem('users',user)
+      }
+      return setCurrentUser(user);
+    });
+    return unsub;
+  }, []);
+
+  return <userContext.Provider value={value}>{children}</userContext.Provider>;
+};
+
+export default UserProvider;

@@ -99,7 +99,7 @@ const Signup = () => {
     <>
       <div className="mx-auto max-w-[1200px] grid lg:grid-cols-2 grid-cols-1 sign-up">
         <form onSubmit={handleSubmit} className="mt-8 sign-up__form px-4">
-          <h1 className="text-3xl text-left uppercase font-extrabold">
+          <h1 className="text-4xl text-left uppercase font-extrabold">
             register
           </h1>
           <div className="text-left my-4 font-light sign-up__btn__google">
