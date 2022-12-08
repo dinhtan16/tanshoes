@@ -63,7 +63,7 @@ const DetailProduct = () => {
   return (
     <>
       <div className="flex mx-auto px-4 mt-8 gap-4 md:flex-col flex-col lg:flex-row md:justify-center justify-center md:items-center items-center lg:items-start">
-        <div className="product-img w-[65%]">
+        <div className="product-img w-full lg:w-[65%]">
           <Swiper navigation={true} modules={[Navigation]} className='max-w-[100%]'>
             {ProductImg.map((item, i) => {
               return (
