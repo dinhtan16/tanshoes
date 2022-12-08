@@ -55,7 +55,7 @@ const ProductCard = ( {item} ) => {
               return (
                 <div
                   key={i}
-                  className={`border border-black p-1 cursor-pointer  transition ${selectedSize ===item ?  'bg-black text-white' : 'hover:bg-black hover:text-white'}`}
+                  className={`border border-black px-4 cursor-pointer  transition ${selectedSize ===item ?  'bg-black text-white' : 'hover:bg-black hover:text-white'}`}
                 >
                  {
                   selectedSize ? (
