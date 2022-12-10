@@ -54,7 +54,7 @@ const CartProvider = ({ children }) => {
 
   useEffect(() => {
     const totalCart = cartItems.reduce(
-      (total, cartItem) => total + cartItem.ProductPrice * cartItem.quantity,
+      (total, cartItem) => total + Number(cartItem.productPrice) * cartItem.quantity,
       0
     );
     localStorage.setItem("total",totalCart)

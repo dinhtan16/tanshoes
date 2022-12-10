@@ -1,6 +1,8 @@
 import React from 'react';
 import {Routes,Route} from 'react-router-dom'
 import "./App.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import Home from './routes/home/home.component'
 import Shop from './components/shop/Shop';
 import Navigate from './routes/navigation/Navigate';

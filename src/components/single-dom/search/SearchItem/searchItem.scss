@@ -1,0 +1,25 @@
+
+.avatar {
+    width: 90px;
+    height: 100%;
+    object-fit: cover;
+
+    img {
+        width: 100%;
+    }
+}
+
+.info {
+    flex: 1;
+    margin-left: 12px;
+}
+
+.name {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.price {
+    font-size: 14px;
+    font-weight: 700;
+}

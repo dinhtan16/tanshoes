@@ -11,7 +11,7 @@ const Banner = () => {
           <p className='m-0  text-white font-normal text-5xl'>impossible</p>
           <p className='m-0 text-white font-normal text-5xl'>is nothing</p>
           <span className='text-white mt-4 text-lg font-light'>Four tournaments in the making. Lionel Messi prepares for FIFA World Cup 2022™ with an impossible rondo.</span>
-         <div className='btn-info font-bold'>
+         <div className='btn-infos font-bold'>
             <Link to='/shop' className='btn-shop hover:text-[#a3a2a2] text-md'>Explore now <span className='text-2xl'><BsArrowRight/></span></Link>
             <Link to='/shop' className='btn-shop secs hover:text-[#a3a2a2] text-md'>Shop now<span className='text-2xl'> <BsArrowRight/></span></Link>
          </div>

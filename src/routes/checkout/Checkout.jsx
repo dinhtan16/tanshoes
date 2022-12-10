@@ -70,18 +70,18 @@ const Checkout = () => {
                 </div>
               )}
               {cartItems.map((item) => {
-             const {  ProductPrice, ProductName, ID, Ava } = item;
+             const {  productPrice, productName, ID, url } = item;
                 
                 return (
                   <div className="flex justify-between my-4 border border-black p-4" key={ID}>
                     <div className="flex gap-4">
                       <img
-                        src={Ava}
+                        src={url}
                         alt="none"
                         className="w-[150px] h-[150px]"
                       />
                       <div className="flex flex-col justify-between">
-                        <Link className="font-light text-xl hover:text-blue-200" to={`/shop/product/${ID}`}>{ProductName}</Link>
+                        <Link className="font-light text-xl hover:text-blue-200" to={`/shop/product/${ID}`}>{productName}</Link>
                         <span className="text-lg">Size :{item.selectedSize}</span>
                         <div className="flex gap-6 items-center">
                           <span
@@ -100,7 +100,7 @@ const Checkout = () => {
                         </div>
                       </div>
                     </div>
-                    <div>{ProductPrice}$</div>
+                    <div>{productPrice}$</div>
                   </div>
                 );
               })}

@@ -10,7 +10,7 @@ p{
   margin: 0;
 }
 a:hover{
-  color:unset;
+  color:unset !important;
 }
 
 @media screen and (max-width:960px) {

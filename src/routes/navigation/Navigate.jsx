@@ -131,7 +131,6 @@ const Navigate = () => {
       {
         <div ref={navMobile} className='nav-mobile'>
            <div className="relative nav-link__mobile h-full flex flex-col gap-8 items-center font-extrabold justify-center mx-auto">
-        <Search />
         {Links.map(({ to, id, name }) => (
           <NavLink
             onClick={closeNav}
@@ -156,14 +155,14 @@ const Navigate = () => {
       </div>
         </div>
       }
-      <div className="bg-black w-full  text-white justify-center flex items-center h-30px py-2 font-light">
+      <div className="bg-black w-full  text-white justify-center flex items-center h-[30px] py-2 font-light">
         <div className="cursor-pointer">
           <TextTransition springConfig={presets.molasses}>
             {TEXTS[index % TEXTS.length]}
           </TextTransition>
         </div>
       </div>
-      <div className={` px-4 w-full mx-auto  ${stickyClass}`}>
+      <div className={` px-4 w-full mx-auto h-[70px]  ${stickyClass}`}>
         <div className="navbar">
           <div className="logo">
             <NavLink to="/">

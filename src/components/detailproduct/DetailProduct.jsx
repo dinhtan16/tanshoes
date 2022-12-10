@@ -33,19 +33,19 @@ const DetailProduct = () => {
 
   const { products } = useContext(ProductsContext);
   const { addItemToCart,setIsOpen } = useContext(CartContext);
-
+  const productDetailStorage = JSON.parse(localStorage.getItem('productDetail'));
+  console.log(Array(productDetailStorage))
   const product = products?.find((item) => item.ID === id);
   const {
-    ProductPrice,
-    ProductSize,
-    ProductName,
+    productPrice,
+    sizeCheck,
+    productName,
     ProductHighlight,
     ProductDescription,
-    ProductImg,
-    Productcolor,
-    Categories,
+    url,
+    productcolor,
+    categories,
   } = product;
-
   const handleBuy = () => {
      addItemToCart(product,selectedSize)
      toast.info(`Loading`, {
@@ -64,18 +64,18 @@ const DetailProduct = () => {
     <>
       <div className="flex mx-auto px-4 mt-8 gap-4 md:flex-col flex-col lg:flex-row md:justify-center justify-center md:items-center items-center lg:items-start">
         <div className="product-img w-full lg:w-[65%]">
-          <Swiper navigation={true} modules={[Navigation]} className='max-w-[100%]'>
+                  <div className="mb-4 ">
+                    <img src={url} alt="none" />
+                  </div>
+          {/* <Swiper navigation={true} modules={[Navigation]} className='max-w-[100%]'>
             {ProductImg.map((item, i) => {
               return (
                 <SwiperSlide key={i} className="flex justify-center">
-                  <div className="mb-4 ">
-                    <img src={item} alt="none" />
-                  </div>
                 </SwiperSlide>
               );
             })}
-          </Swiper>
-          <div className="accord px-4">
+          </Swiper> */}
+          {/* <div className="accord px-4">
           <Accordion allowMultipleExpanded>
             <AccordionItem>
                 <AccordionItemHeading>
@@ -99,20 +99,20 @@ const DetailProduct = () => {
             </AccordionItem>
         </Accordion>
   
-          </div>
+          </div> */}
         </div>
         <div className="product-info flex-1 w-full">
-          <div className="categories">{Categories}</div>
-          <div className="product-name_detail">{ProductName}</div>
-          <div className="product-price">{ ProductPrice}$</div>
-          <div className="product-color">{Productcolor}</div>
+          <div className="categories">{categories}</div>
+          <div className="product-name_detail">{productName}</div>
+          <div className="product-price">{ productPrice}$</div>
+          <div className="product-color">{productcolor}</div>
           <div className="product-size ">
             <span>Size</span>
             <div className="flex gap-2">
-              {ProductSize.map((item, i) => (
+              {sizeCheck.map((item, i) => (
                 <button
                   key={i}
-                  className="border border-black p-3 cursor-pointer hover:bg-black flex items-center hover:text-white transition"
+                  className={`border border-black px-4 h-[40px] cursor-pointer  transition ${selectedSize ===item ?  'bg-black text-white' : 'hover:bg-black hover:text-white'}`}
                   onClick={() => {
                     setSelectedSize(item);
                     toast.success(`Selected`, {

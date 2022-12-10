@@ -12,67 +12,69 @@ export const AddProducts = () => {
   const [categories, setCategories] = useState("");
   const [color, setColor] = useState("");
   const [highlight, setHighlight] = useState("");
-  // const types = ["image/png", "image/jpeg"]; // image types
+
+  const listType = [
+    { value: "MenShoes", label: "Men shoes" },
+    { value: "WomanShoes", label: "Woman shoes" },
+    { value: "KidShoes", label: "Kid Originals" },
+    { value: "Slides", label: "Slides" },
+    { value: "Global", label: "Global" },
+  ];
+  const types = ["image/png", "image/jpeg"]; // image types
   const productImgHandler = (e) => {
-    // let selectedFile = e.target.files[0];
-    // if (selectedFile && types.includes(selectedFile.type)) {
-    //   setProductImg(prev => [...prev,selectedFile]);
-    //   setError("");
-    // } else {
-    //   setProductImg(null);
-    //   setError("Please select a valid image type (jpg or png)");
-    // }
-    for (let i = 0; i < e.target.files.length; i++) {
-      const newImage = e.target.files[i];
-      newImage["id"] = Math.random();
-      setProductImg((prevState) => [...prevState, newImage]);
+    let selectedFile = e.target.files[0];
+    if (selectedFile && types.includes(selectedFile.type)) {
+      setProductImg(selectedFile);
+      setError("");
+    } else {
+      setProductImg(null);
+      setError("Please select a valid image type (jpg or png)");
     }
+    // for (let i = 0; i < e.target.files.length; i++) {
+    //   const newImage = e.target.files[i];
+    //   newImage["id"] = Math.random();
+    //   setProductImg((prevState) => [...prevState, newImage]);
+    // }
   };
 
   // console.log(imgUrls)
 
-  const addProduct = async (e) => {
+  const addProduct =  (e) => {
     e.preventDefault();
-    const handleUploadImage = () => {
-      return new Promise((resolve) => {
-        let listUrls = [];
-        productImg.forEach(async (item, index) => {
-          const storageRef = ref(storage, `product-images/${item.name}`);
-          //upload
-          await uploadBytes(storageRef, item);
+    if (productImg === null) {
+      console.log("error", "Create product fail");
+      return;
+    }
+      const storageRef = ref(storage, `product-images/${productImg.name}`);
+      const uploadTask = uploadBytes(storageRef, productImg)
+        .then(async (snapshot) => {
           const url = await getDownloadURL(ref(storage, storageRef));
-          listUrls.push(url);
-
-          if (index === productImg.length - 1) {
-            resolve(listUrls);
-          }
+          await setDoc(doc(collection(db, "Products")), {
+           productName,
+           productPrice,
+           url,
+           sizeCheck,
+           productDes,
+          categories,
+            color,
+          highlight,
+          }).then(() => {
+            setProductName("");
+            setProductPrice(0);
+            setProductImg("");
+            setError("");
+            setProductDescription("");
+            setCategories("");
+            setColor("");
+            setHighlight("");
+            document.getElementById("file").value = "";
+          });
+          console.log("success", "Create product success");
+        })
+        .catch((err) => {
+          console.log("error", "Create product fail");
         });
-      });
-    };
-    const img = await handleUploadImage();
-    //ref storage
-    await setDoc(doc(collection(db, "Products")), {
-      ProductName: productName,
-      ProductPrice: Number(productPrice),
-      ProductImg: img,
-      ProductSize: sizeCheck,
-      ProductDescription: productDes,
-      Categories: categories,
-      Productcolor: color,
-      ProductHighlight: highlight,
-    })
-      .then(() => {
-        setProductName("");
-        setProductPrice(0);
-        setProductImg("");
-        setError("");
-        setProductDescription("");
-        setCategories("");
-        setColor("");
-        setHighlight("");
-        document.getElementById("file").value = "";
-      })
-      .catch((err) => setError(err.message));
+  
   };
   const sizeList = [
     {
@@ -119,7 +121,6 @@ export const AddProducts = () => {
         <input
           type="text"
           className="form-control"
-          
           onChange={(e) => setProductName(e.target.value)}
           value={productName}
         />
@@ -128,7 +129,6 @@ export const AddProducts = () => {
         <input
           type="text"
           className="form-control"
-          
           onChange={(e) => setHighlight(e.target.value)}
           value={highlight}
         />
@@ -137,37 +137,41 @@ export const AddProducts = () => {
         <input
           type="text"
           className="form-control"
-          
           onChange={(e) => setProductDescription(e.target.value)}
           value={productDes}
         />
         <br />
         <label htmlFor="categories">Categories</label>
         <select
-          className="h-[40px] w-[200px] ml-12 mb-6 border border-black"
-          value={categories}
+          name="typeProduct"
+          id="type"
           onChange={(e) => {
-            const selectedFood = e.target.value;
-            setCategories(selectedFood);
+            setCategories(e.target.value);
+            console.log(e.target.value);
           }}
         >
-          <option value="Men Shoes">Men Shoes</option>
-          <option value="Slides">Slides</option>
-          <option value="Kid originals">Kid originals</option>
+          <option disabled selected hidden>
+            Phân loại
+          </option>
+          {listType.map((type, index) => {
+            return (
+              <option value={type.value} key={index}>
+                {type.label}
+              </option>
+            );
+          })}
         </select>
         <br />
-        <input
+        {/* <input
           type="text"
           className="form-control"
-          
           onChange={(e) => setCategories(e.target.value)}
           value={categories}
-        />
+        /> */}
         <label htmlFor="color">Color</label>
         <input
           type="text"
           className="form-control"
-          
           onChange={(e) => setColor(e.target.value)}
           value={color}
         />
@@ -195,7 +199,6 @@ export const AddProducts = () => {
         <input
           type="number"
           className="form-control"
-          
           onChange={(e) => setProductPrice(e.target.value)}
           value={productPrice}
         />
@@ -205,7 +208,6 @@ export const AddProducts = () => {
           type="file"
           className="form-control"
           id="file"
-          
           onChange={productImgHandler}
         />
         <br />

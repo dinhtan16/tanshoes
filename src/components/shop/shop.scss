@@ -1,0 +1,33 @@
+.paginate{
+    border-top: 1px solid black;
+    padding-top: 20px;
+    display: flex;
+    list-style: none;
+    justify-items: center;
+    margin-top: 2rem;
+    margin-left: 20px;
+    align-items: center;
+    .prev{
+        // margin-left: 20px;
+        // border: 1px solid black;
+        padding:10px;
+        color:red
+
+    }
+    .next{
+        // border:  solid black;
+        padding:10px;
+        color:red
+    }
+  }
+  .page-link{
+    padding:12px;
+    // background-color: red;
+    // border:1px solid black;
+    text-decoration: underline;
+    cursor: pointer;
+    
+    &:hover{
+        color: white;;
+    }
+  }
