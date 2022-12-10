@@ -35,7 +35,12 @@ const Shop = () => {
     const newOffset = (event.selected * itemPerPage) % products.length;
     setItemOffset(newOffset);
   };
-
+    const handleChange =(e)=>{
+      setCategories(e.target.value)
+    }
+    const handleChangePrice =(e)=>{
+      setPrice(e.target.value)
+    }
   return (
     <Container>
     <Row>
