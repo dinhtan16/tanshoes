@@ -7,6 +7,9 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
+import { db } from "../../utils/firebase/firebase";
+import { getDocs,collection } from "firebase/firestore";
+
 import ProductCard from "../product/ProductCard";
 import ReactPaginate from "react-paginate";
 
@@ -14,33 +17,56 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col'
 
+
+
 const Shop = () => {
 
   const { products } = useContext(ProductsContext);
-  console.log(products)
   const [categories, setCategories] = React.useState("");
   const [price, setPrice] = React.useState("");
+  const [value, setValue] = useState('');
+  
   //paginate
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
   const itemPerPage = 4;
+
+  let dataRender;
+  if (categories.length > 0) {
+      dataRender = categories;
+  } else {
+      dataRender = products;
+  }
   useEffect(() => {
     const endOffset = itemOffset + itemPerPage;
-    setCurrentItems(products.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(products.length / itemPerPage));
-  }, [itemOffset, itemPerPage, products]);
+    setCurrentItems(dataRender.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(dataRender.length / itemPerPage));
+  }, [itemOffset, itemPerPage, dataRender]);
 
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemPerPage) % products.length;
+    const newOffset = (event.selected * itemPerPage) % dataRender.length;
     setItemOffset(newOffset);
   };
     const handleChange =(e)=>{
       setCategories(e.target.value)
+      const categorySelected = e.target.value
+      setValue(categorySelected)
+      if (categorySelected === 'All') {
+        setCategories(products);
+
+    } else {
+        const filterData = products.filter(
+            (product) => product.categories.toLowerCase() === categorySelected.toLowerCase(),
+        );
+        setCategories(filterData);
     }
+    setItemOffset(0);
+  }
     const handleChangePrice =(e)=>{
       setPrice(e.target.value)
-    }
+  }
+
   return (
     <Container>
     <Row>
@@ -56,14 +82,18 @@ const Shop = () => {
                     defaultValue="Men Shoes"
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={categories}
+                    value={value}
                     label="Filter by Categories"
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     inputProps={{ MenuProps: { disableScrollLock: true } }}
                   >
-                    <MenuItem value={"Men Shoes"}>Men Shoes</MenuItem>
-                    <MenuItem value={"Kids originals"}>Kids originals</MenuItem>
+                    <MenuItem value={"All"}>All</MenuItem>
+                    <MenuItem value={"MenShoes"}>Men Shoes</MenuItem>
+                    <MenuItem value={"KidShoes"}>Kids originals</MenuItem>
                     <MenuItem value={"Slides"}>Slides</MenuItem>
+                    <MenuItem value={"WomanShoes"}>Womans</MenuItem>
+                    <MenuItem value={"Global"}>Global</MenuItem>
+
                   </Select>
                 </FormControl>
               </Box>
