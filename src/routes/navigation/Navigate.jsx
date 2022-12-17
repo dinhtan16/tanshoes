@@ -32,7 +32,7 @@ const Links = [
   },
   {
     id: 3,
-    to: "/cart",
+    to: "/checkout",
     name: "cart",
   },
   {
@@ -162,7 +162,7 @@ const Navigate = () => {
           </TextTransition>
         </div>
       </div>
-      <div className={` px-4 w-full mx-auto h-[70px]  ${stickyClass}`}>
+      <div className={` px-4 w-full mx-auto mb-4 h-[60px]  ${stickyClass}`}>
         <div className="navbar">
           <div className="logo">
             <NavLink to="/">
@@ -235,7 +235,7 @@ const Navigate = () => {
               </NavLink>
             )}
 
-            <button>
+            <button className="cart-icon">
               <CartIcon />
             </button>
             <div className="nav-toggle" ref={barRef} onClick={showNavbar}>

@@ -5,7 +5,6 @@
 .navbar{
     display: flex;
     justify-content: space-between;
-    height: 60px;
     align-items: center;
     .nav-link{
         display: flex;
@@ -20,16 +19,32 @@
         gap:28px;
     }
 }
-
+.heart-icon{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
 @media screen and (max-width:940px) {
     
     .navbar {
-        
+        height: 120px;
+        display: flex;
+        align-items: center;
+    
         .nav-link{
             display: none;
         }
         .nav-toggle{
             display: block;
+        }
+        .actions{
+            display: flex;
+            align-items: center;
+            gap:15px;
+            margin-left: auto;
+            .cart-icon{
+                display: none;
+            }
         }
        
     }
@@ -45,7 +60,7 @@
     height: 100%;
     padding:  0 24px;
     z-index: 10;
-    max-width: 250px;
+    max-width: 290px;
     background-color: white;
     left: 0;
     transform: translateX(-250px);

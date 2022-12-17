@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import { useReducer } from "react";
 import { useEffect } from "react";
 
 export const CartContext = createContext({
@@ -8,8 +9,9 @@ export const CartContext = createContext({
   addItemToCart: () => {},
   deleteItemToCart: () => {},
   total: 0,
-  setCartItems:() =>{}
+  setCartItems: () => {},
 });
+
 const addItemCart = (cartItems, itemToAdd, selectedSize) => {
   const existedItem = cartItems.find((item) => item.ID === itemToAdd.ID);
 
@@ -36,43 +38,77 @@ const deleteItem = (cartItems, itemDelete) => {
     item.ID === itemDelete.ID ? { ...item, quantity: item.quantity - 1 } : item
   );
 };
+const storeCart = JSON.parse(localStorage.getItem("Cart"));
+const storeTotalCart = localStorage.getItem("total");
 
+const INIT_STATE = {
+  cartItems: storeCart ?? [],
+  isOpen: false,
+  total: storeTotalCart,
+};
+const cartReducer = (state, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case "SET_CART_ITEMS":
+      return {
+        ...state,
+        ...payload, //(cartItems,total)
+      };
+    default:
+      throw new Error(`error ${type}`);
+  }
+};
 const CartProvider = ({ children }) => {
-  const storeCart = JSON.parse(localStorage.getItem("Cart"))
-  const storeTotalCart = localStorage.getItem("total")
+  // const [cartItems, setCartItems] = useState(storeCart ?? []);
+  // const [total, setTotal] = useState(storeTotalCart);
+  // const [isOpen, setIsOpen] = useState(false);
 
-
-  const [cartItems, setCartItems] = useState(storeCart ?? []);
-  const [total, setTotal] = useState(storeTotalCart);
-  const [isOpen, setIsOpen] = useState(false);
-  const addItemToCart = (itemToAdd, selectedSize) => {
-    setCartItems(addItemCart(cartItems, itemToAdd, selectedSize));
-  };
-  const deleteItemToCart = (itemDelete) => {
-    setCartItems(deleteItem(cartItems, itemDelete));
-  };
-
-  useEffect(() => {
-    const totalCart = cartItems.reduce(
-      (total, cartItem) => total + Number(cartItem.productPrice) * cartItem.quantity,
+  const [{ cartItems, isOpen, total }, dispatch] = useReducer(
+    cartReducer,
+    INIT_STATE
+  );
+  const updateCartItemsReducer = (newCartItems) => {
+    const newTotalCart = newCartItems.reduce(
+      (total, cartItem) =>
+        total + Number(cartItem.productPrice) * cartItem.quantity,
       0
     );
-    localStorage.setItem("total",totalCart)
+    localStorage.setItem("total", newTotalCart);
 
-    setTotal(totalCart);
-  }, [cartItems]);
+    dispatch({
+      type: "SET_CART_ITEMS",
+      payload: { cartItems: newCartItems, total: newTotalCart },
+    });
+  };
+
+  const addItemToCart = (itemToAdd, selectedSize) => {
+    const newCartItems = addItemCart(cartItems, itemToAdd, selectedSize);
+    updateCartItemsReducer(newCartItems);
+  };
+  const deleteItemToCart = (itemDelete) => {
+    const newCartItems = deleteItem(cartItems, itemDelete);
+    updateCartItemsReducer(newCartItems);
+  };
+
+  // useEffect(() => {
+  //   const totalCart = cartItems.reduce(
+  //     (total, cartItem) =>
+  //       total + Number(cartItem.productPrice) * cartItem.quantity,
+  //     0
+  //   );
+
+  //   setTotal(totalCart);
+  // }, [cartItems]);
   const value = {
     isOpen,
-    setIsOpen,
+    setIsOpen: () => {},
     cartItems,
     addItemToCart,
     deleteItemToCart,
     total,
-    setCartItems
   };
-  //total
 
-  localStorage.setItem("Cart",JSON.stringify(cartItems ))
+  localStorage.setItem("Cart", JSON.stringify(cartItems));
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
 

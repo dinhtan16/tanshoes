@@ -7,8 +7,6 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-import { db } from "../../utils/firebase/firebase";
-import { getDocs,collection } from "firebase/firestore";
 
 import ProductCard from "../product/ProductCard";
 import ReactPaginate from "react-paginate";
@@ -37,7 +35,10 @@ const Shop = () => {
       dataRender = categories;
   } else {
       dataRender = products;
-  }
+  };
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   useEffect(() => {
     const endOffset = itemOffset + itemPerPage;
     setCurrentItems(dataRender.slice(itemOffset, endOffset));
@@ -47,6 +48,8 @@ const Shop = () => {
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemPerPage) % dataRender.length;
     setItemOffset(newOffset);
+    window.scrollTo(0, 0);
+
   };
     const handleChange =(e)=>{
       setCategories(e.target.value)
@@ -70,11 +73,11 @@ const Shop = () => {
   return (
     <Container>
     <Row>
-        <Col lg='12'>
+        <Col lg='12' xs='12' md='12'>
           <div className="my-6 px-8 flex gap-4 items-center flex-wrap" id="12">
-            <div className="filter-categories">
+            <div className="filter-categories" lg='6'>
               <Box sx={{ minWidth: 100 }}>
-                <FormControl size="small" className="w-[100px] lg:w-[300px]">
+                <FormControl size="small" className="w-[200px] lg:w-[300px]" lg='6'>
                   <InputLabel id="demo-simple-select-label">
                     Filter by Categories
                   </InputLabel>
@@ -99,8 +102,8 @@ const Shop = () => {
               </Box>
             </div>
             <div className="filter-categories">
-              <Box sx={{ minWidth: 300 }}>
-                <FormControl size="small" className="w-[100px] lg:w-[300px]">
+              <Box sx={{ minWidth: 100 }}>
+                <FormControl size="small" className="w-[200px] lg:w-[300px]">
                   <InputLabel id="demo-simple-select-label">
                     Filter by Price
                   </InputLabel>

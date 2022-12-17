@@ -10,3 +10,31 @@
       height: 620px;
     }
 }
+.product-body{
+  display: flex;
+  flex-direction: column;
+  // height: calc(100% - 324px);
+  transition: all .2s ease-in;
+  padding: 10px;
+  border: 1px solid transparent;
+
+  &:hover{
+    border: 1px solid grey;
+  }
+  .product-body-top{
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    .product-size-map{
+      display: flex;
+      flex:1;
+      gap: 10px;
+    }
+  
+  
+  
+  }
+  .product-body-bottom {
+   margin-top: auto;
+  }
+}

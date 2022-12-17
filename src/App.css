@@ -13,18 +13,4 @@ a:hover{
   color:unset !important;
 }
 
-@media screen and (max-width:960px) {
 
-  html{
-  font-size: 80%;
-}
-  
-}
-
-@media screen and (max-width:560px) {
-
-  html{
-  font-size: 60%;
-}
-  
-}
