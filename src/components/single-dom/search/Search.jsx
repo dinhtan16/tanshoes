@@ -104,7 +104,7 @@ const Search = () => {
       )}
       onClickOutside={handleTooltip}
     >
-      <div class=" flex justify-center items-center">
+      <div class=" flex items-center">
         <div class="relative search">
           <input
             ref={inputRef}
@@ -119,7 +119,7 @@ const Search = () => {
               }
             }}
             type="text"
-            class="h-9 text-sm font-light w-60
+            class="h-9  font-light w-60
            border border-black  px-2 py-4 bg-slate-100  z-0 focus:shadow focus:outline-none"
             placeholder="Search anything..."
           />

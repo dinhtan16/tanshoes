@@ -18,6 +18,12 @@ import { BiLogInCircle } from "react-icons/bi";
 import { CgAdidas } from "react-icons/cg";
 
 import TextTransition, { presets } from "react-text-transition";
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 const Links = [
   {
@@ -35,26 +41,18 @@ const Links = [
     to: "/checkout",
     name: "cart",
   },
+
   {
     id: 4,
-    to: "/sport",
-    name: "sport",
+    to: "/none",
+    name: "Womens",
   },
   {
     id: 5,
-    to: "/kids",
-    name: "KIDS",
+    to: "/none",
+    name: "Kids",
   },
-  {
-    id: 6,
-    to: "/women",
-    name: "Women",
-  },
-  // {
-  //   id: 4,
-  //   to: "/account",
-  //   name: "Account",
-  // },
+
 ];
 
 const TEXTS = [
@@ -67,8 +65,8 @@ const Navigate = () => {
   const { setCartItems } = useContext(CartContext);
   const { isOpen } = useContext(CartContext);
 
-  const barRef = useRef(null);
-  const navMobile = useRef(null);
+  // const barRef = useRef(null);
+  // const navMobile = useRef(null);
 
 
   const navigate = useNavigate();
@@ -87,26 +85,26 @@ const Navigate = () => {
       theme: "light",
     });
   };
-  const [stickyClass, setStickyClass] = useState("relative");
+  // const [stickyClass, setStickyClass] = useState("relative");
 
-  useEffect(() => {
-    window.addEventListener("scroll", stickNavbar);
+  // useEffect(() => {
+  //   window.addEventListener("scroll", stickNavbar);
 
-    return () => {
-      window.removeEventListener("scroll", stickNavbar);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("scroll", stickNavbar);
+  //   };
+  // }, []);
 
-  const stickNavbar = () => {
-    if (window !== undefined) {
-      let windowHeight = window.scrollY;
-      windowHeight > 80
-        ? setStickyClass(
-            "fixed top-0 left-0 z-50  right-0 w-full px-4 bg-white"
-          )
-        : setStickyClass("relative");
-    }
-  };
+  // const stickNavbar = () => {
+  //   if (window !== undefined) {
+  //     let windowHeight = window.scrollY;
+  //     windowHeight > 80
+  //       ? setStickyClass(
+  //           "fixed top-0 left-0 z-50  right-0 w-full px-4 bg-white"
+  //         )
+  //       : setStickyClass("relative");
+  //   }
+  // };
 
   const [index, setIndex] = React.useState(0);
 
@@ -119,42 +117,16 @@ const Navigate = () => {
   }, []);
 
   //handleNav
-  const showNavbar = () => {
-    navMobile.current.classList.toggle('active')
-  }
-  const closeNav = () => {
-    navMobile.current.classList.remove('active')
-  }
+  // const showNavbar = () => {
+  //   navMobile.current.classList.toggle('active')
+  // }
+  // const closeNav = () => {
+  //   navMobile.current.classList.remove('active')
+  // }
   
   return (
     <>
-      {
-        <div ref={navMobile} className='nav-mobile'>
-           <div className="relative nav-link__mobile h-full flex flex-col gap-8 items-center font-extrabold justify-center mx-auto">
-        {Links.map(({ to, id, name }) => (
-          <NavLink
-            onClick={closeNav}
-            to={to}
-            key={id}
-            className={(navData) =>
-              navData.isActive
-                ? "text-red-500 uppercase"
-                : "text-black hover:text-red-500 uppercase"
-            }
-          >
-            {name}
-          </NavLink>
-        ))}
-        <div
-          
-          className="underline font-light active:bg-sky-200 mt-2"
-          onClick={closeNav}
-        >
-          Close
-        </div>
-      </div>
-        </div>
-      }
+     
       <div className="bg-black w-full  text-white justify-center flex items-center h-[30px] py-2 font-light">
         <div className="cursor-pointer">
           <TextTransition springConfig={presets.molasses}>
@@ -162,36 +134,57 @@ const Navigate = () => {
           </TextTransition>
         </div>
       </div>
-      <div className={` px-4 w-full mx-auto mb-4 h-[60px]  ${stickyClass}`}>
-        <div className="navbar">
-          <div className="logo">
-            <NavLink to="/">
-              <span className="text-3xl">
-                <CgAdidas />
-              </span>
-            </NavLink>
-          </div>
-          <div className="nav-link">
+      <Navbar bg="light" expand="lg" sticky="top">
+      <Container fluid>
+        <Navbar.Brand className="lg:px-10"><NavLink to="/"><span className="text-3xl"> <CgAdidas /></span></NavLink></Navbar.Brand>
+        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Collapse id="navbarScroll">
+          <Nav
+            className="me-auto my-2 my-lg-0 flex lg:items-center gap-7 flex-shrink-0"
+            style={{ maxHeight: '200px' }}
+            navbarScroll
+          >
             {Links.map(({ to, id, name }) => (
               <NavLink
                 to={to}
                 key={id}
                 className={(navData) =>
                   navData.isActive
-                    ? "text-red-500 uppercase"
-                    : "text-black hover:text-red-500 uppercase"
+                    ? "uppercase font-bold"
+                    : "text-black hover:text-red-500 uppercase font-light"
                 }
               >
                 {name}
               </NavLink>
             ))}
-          </div>
-          <div className="actions">
-            <div className="search">
-              {" "}
-              <Search />
-            </div>
+            {/* <NavLink to="/"> <CgAdidas /></NavLink>
+            <NavLink to="/shop"> Men</NavLink>
+            <NavLink to="/shop"> Women</NavLink>
+            <NavLink to="/shop"> Originals</NavLink>
+            <NavLink to="/checkout"> Carts</NavLink>
+            <NavLink to="/shop"> Kids</NavLink> */}
 
+            {/* <NavLink to="/"> <CgAdidas /></NavLink> */}
+            <NavDropdown title="New Release" id="navbarScrollingDropdown" className="font-light">
+              <NavDropdown.Item href="#action3">News</NavDropdown.Item>
+              <NavDropdown.Item href="#action4">
+                Adidas Ultra Boost
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action5">
+                Something else here
+              </NavDropdown.Item>
+            </NavDropdown>
+            {/* <Nav.Link href="#" disabled>
+              Link
+            </Nav.Link> */}
+          </Nav>
+          <Form className="flex items-center gap-4 lg:gap-4 flex-wrap flex-shrink-1">
+          
+           <div className="flex items-center gap-2 flex-wrap">
+              <Search />
+              <Button variant="outline-success">Search</Button>
+           </div>
             {currentUser ? (
               <>
                 <NavLink
@@ -211,26 +204,21 @@ const Navigate = () => {
                 <button
                   onClick={signOutHandler}
                   className="uppercase hover:text-red-500"
-                  data-tip="Log out"
-                  data-place="bottom"
+                
                 >
-                  <ReactTooltip />
-                  <span className="text-2xl">
-                    {" "}
-                    <AiOutlineLogout />
-                  </span>
+                  <span className="font-bold underline hover:text-sky-500 transition-all">
+                  LOG OUT
+                </span>
                 </button>
               </>
             ) : (
               <NavLink
                 to="/account"
                 className="uppercase hover:text-red-500"
-                data-tip="Sign In"
-                data-place="bottom"
+                
               >
-                <ReactTooltip />
-                <span className="text-2xl">
-                  <BiLogInCircle />
+                <span className="font-bold underline hover:text-sky-500 transition-all">
+                  SIGN IN
                 </span>
               </NavLink>
             )}
@@ -238,17 +226,20 @@ const Navigate = () => {
             <button className="cart-icon">
               <CartIcon />
             </button>
-            <div className="nav-toggle" ref={barRef} onClick={showNavbar}>
+          </Form>
+          
+            {/* <div className="nav-toggle" ref={barRef} onClick={showNavbar}>
               {" "}
               <span className="text-3xl">
                 {" "}
                 <FaBars />
               </span>
-            </div>
-          </div>
-        </div>
+            </div> */}
+      
         {isOpen && <CartDropdown />}
-      </div>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
       <Outlet />
     </>
   );

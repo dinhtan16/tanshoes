@@ -15,12 +15,7 @@ body,*{
     box-sizing: border-box;
   }
   a{
-    color: unset !important;
+    color: unset ;
     text-decoration: unset !important;
     font-size: unset !important;
-    
-    
-  }
-  a:active{
-    color: red !important;
   }
