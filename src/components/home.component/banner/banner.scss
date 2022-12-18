@@ -17,10 +17,14 @@
 .secs{
     width: 155px;
 }
-.bgr-banner{
+.bgr-banner,.bgr-banner-2{
     background-image: url('../../../assets/banner.jpg');
     background-position: 69%;
     background-size: cover;
     background-repeat: no-repeat;
     // padding: 60px;
+}
+.bgr-banner-2{
+    background-image: url('../../../assets/banner2.jpg');
+
 }

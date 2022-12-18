@@ -16,7 +16,7 @@ import {
 
 import { Input } from "../single-dom/Input";
 import ClubContent from "../single-dom/ClubContent/ClubContent";
-import { Banner } from "../single-dom/banner";
+import { Banner } from "../single-dom/footer-banner";
 
 const SignIn = () => {
   const navigate = useNavigate();
