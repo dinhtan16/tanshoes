@@ -19,3 +19,6 @@ body,*{
     text-decoration: unset !important;
     font-size: unset !important;
   }
+.collapse{
+  visibility:unset !important;
+}

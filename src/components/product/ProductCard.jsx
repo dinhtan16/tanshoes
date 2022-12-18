@@ -14,7 +14,18 @@ const ProductCard = ({ item }) => {
   const [selectedSize, setSelectedSize] = useState(null);
   const [cartItem, setCartItem] = useState(null);
 
-  const addProductToCart = () => addItemToCart(item, cartItem);
+  const addProductToCart = () => {
+
+    toast.success(`Added to your cart!`, {
+      position: "bottom-center",
+      autoClose: 300,
+      hideProgressBar: true,
+      progress: undefined,
+      theme: "light",
+    });
+    addItemToCart(item, cartItem)
+    setSelectedSize(null)
+  };
   const handleSizeAlert = () => {
     toast.warning(`Please select size first !`, {
       position: "top-center",
@@ -37,7 +48,7 @@ const ProductCard = ({ item }) => {
             <div className="product-price w-auto absolute top-0  text-left px-2 py-1 left-2 bg-white text-black font-light">
               {productPrice}$
             </div>
-            <div className="heart-icon bg-white right-2 w-[30px] h-[30px] flex items-center justify-center cursor-pointer hover:text-red-500">
+            <div className="heart-icon bg-white top-0 absolute right-2 w-[30px] h-[30px] flex items-center justify-center cursor-pointer hover:text-red-500">
               <RiHeartAddLine />
             </div>
             <div className="product-name">

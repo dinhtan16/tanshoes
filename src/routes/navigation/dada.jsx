@@ -136,55 +136,76 @@ const Navigate = () => {
           </TextTransition>
         </div>
       </div>
-      <nav className="navbar navbar-expand-lg sticky-top navbar-light bg-light">
-        <div className="container-fluid">
-          <NavLink className="navbar-brand font-extrabold text-2xl" to="/">
-            Adidos
-          </NavLink>
-      <div className="flex items-center gap-4">
-      <button className="cart-icon lg:hidden">
-                <CartIcon />
-              </button>
-            <button
-              onClick={toggleNav}
-              className={navOpen ? "navbar-toggler" : "navbar-toggler collapsed"}
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
-      </div>
-          <div
-            className={
-              navOpen
-                ? "collapse navbar-collapse show transition-all flex justify-between"
-                : "collapse navbar-collapse transition-all flex justify-between"
-            }
-            id="navbarNav"
+      <Navbar bg="light" expand="lg" sticky="top">
+        <Container fluid>
+          <Navbar.Brand className="lg:px-10">
+            <NavLink to="/">
+              <span className="text-3xl">
+                {" "}
+                <CgAdidas />
+              </span>
+            </NavLink>
+          </Navbar.Brand>
+          <Navbar.Toggle
+            aria-controls="navbarScroll"
+            data-bs-toggle="collapse" 
+            
+            data-bs-target="#navbarScroll"
+
+          />
+          <Navbar.Collapse
+            id="navbarScroll"
           >
-            <ul className="navbar-nav gap-8 lg:ml-8">
+            <Nav
+              className={` me-auto my-2 my-lg-0 flex lg:items-center gap-7 flex-shrink-0 lg:overflow-hidden md:overflow-scroll`}
+              style={{ maxHeight: "200px" }}
+              navbarScroll
+            >
               {Links.map(({ to, id, name }) => (
                 <NavLink
-                  onClick={toggleNav}
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarScroll" 
                   to={to}
                   key={id}
                   className={(navData) =>
                     navData.isActive
-                      ? "uppercase font-bold nav-item"
-                      : "text-black hover:text-red-500 uppercase font-light nav-item"
+                      ? "uppercase font-bold"
+                      : "text-black hover:text-red-500 uppercase font-light"
                   }
                 >
                   {name}
                 </NavLink>
               ))}
-            </ul>
-            <Form className="flex items-center gap-4 lg:gap-4 flex-wrap flex-shrink-1 actions">
+              {/* <NavLink to="/"> <CgAdidas /></NavLink>
+            <NavLink to="/shop"> Men</NavLink>
+            <NavLink to="/shop"> Women</NavLink>
+            <NavLink to="/shop"> Originals</NavLink>
+            <NavLink to="/checkout"> Carts</NavLink>
+            <NavLink to="/shop"> Kids</NavLink> */}
+
+              {/* <NavLink to="/"> <CgAdidas /></NavLink> */}
+              <NavDropdown
+                title="New Release"
+                id="navbarScrollingDropdown"
+                className="font-light"
+              >
+                <NavDropdown.Item href="#action3">News</NavDropdown.Item>
+                <NavDropdown.Item href="#action4">
+                  Adidas Ultra Boost
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action5">
+                  Something else here
+                </NavDropdown.Item>
+              </NavDropdown>
+              {/* <Nav.Link href="#" disabled>
+              Link
+            </Nav.Link> */}
+            </Nav>
+            <Form className="flex items-center gap-4 lg:gap-4 flex-wrap flex-shrink-1">
               <div className="flex items-center gap-2 flex-wrap">
                 <Search />
+                <Button variant="outline-success">Search</Button>
               </div>
               {currentUser ? (
                 <>
@@ -219,13 +240,23 @@ const Navigate = () => {
                 </NavLink>
               )}
 
+              <button className="cart-icon">
+                <CartIcon />
+              </button>
             </Form>
-              
-          </div>
+
+            {/* <div className="nav-toggle" ref={barRef} onClick={showNavbar}>
+              {" "}
+              <span className="text-3xl">
+                {" "}
+                <FaBars />
+              </span>
+            </div> */}
+
             {isOpen && <CartDropdown />}
-       
-        </div>
-      </nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
       <Outlet />
     </>
   );
