@@ -74,6 +74,7 @@ const Navigate = () => {
   ];
   const navigate = useNavigate();
   const signOutHandler = async () => {
+    setNavOpen((state) => !state);
     await signOutUser();
     //  setCurrentUser(null)
     localStorage.clear();
@@ -138,13 +139,11 @@ const Navigate = () => {
       </div>
       <nav className="navbar navbar-expand-lg sticky-top navbar-light bg-light">
         <div className="container-fluid">
-          <NavLink className="navbar-brand font-extrabold text-2xl" to="/">
+          <NavLink className="navbar-brand font-extrabold text-2xl" to="/"   onClick={toggleNav}> 
             Adidos
           </NavLink>
       <div className="flex items-center gap-4">
-      <button className="cart-icon lg:hidden">
-                <CartIcon />
-              </button>
+            
             <button
               onClick={toggleNav}
               className={navOpen ? "navbar-toggler" : "navbar-toggler collapsed"}
@@ -160,13 +159,13 @@ const Navigate = () => {
       </div>
           <div
             className={
-              navOpen
-                ? "collapse navbar-collapse show transition-all flex justify-between"
-                : "collapse navbar-collapse transition-all flex justify-between"
+              `${navOpen
+                ? "collapse navbar-collapse show transition-all"
+                : "collapse navbar-collapse transition-all"} flex justify-between flex-wrap`
             }
             id="navbarNav"
           >
-            <ul className="navbar-nav gap-8 lg:ml-8">
+            <ul className="navbar-nav gap-8 lg:ml-8 flex lg:items-center flex-shrink-0 underline">
               {Links.map(({ to, id, name }) => (
                 <NavLink
                   onClick={toggleNav}
@@ -175,17 +174,14 @@ const Navigate = () => {
                   className={(navData) =>
                     navData.isActive
                       ? "uppercase font-bold nav-item"
-                      : "text-black hover:text-red-500 uppercase font-light nav-item"
+                      : "text-black hover:text-red-500 uppercase font-light nav-item  hover:font-bold transition-all"
                   }
                 >
                   {name}
                 </NavLink>
               ))}
-            </ul>
-            <Form className="flex items-center gap-4 lg:gap-4 flex-wrap flex-shrink-1 actions">
-              <div className="flex items-center gap-2 flex-wrap">
-                <Search />
-              </div>
+            
+              <div className="inline-flex items-center gap-4">
               {currentUser ? (
                 <>
                   <NavLink
@@ -212,15 +208,23 @@ const Navigate = () => {
                   </button>
                 </>
               ) : (
-                <NavLink to="/account" className="uppercase hover:text-red-500">
-                  <span className="font-bold underline hover:text-sky-500 transition-all">
+                <NavLink to="/account" className="uppercase hover:text-red-500 py-4" onClick={toggleNav}>
+                  <span className="font-bold underline hover:text-sky-500 transition-all py-4">
                     SIGN IN
                   </span>
                 </NavLink>
               )}
 
-            </Form>
-              
+              </div>
+            </ul>
+            <div className=" flex items-center gap-2">
+            <Search />
+        
+            <button className="cart-icon">
+                <CartIcon />
+              </button>
+            </div>
+            
           </div>
             {isOpen && <CartDropdown />}
        

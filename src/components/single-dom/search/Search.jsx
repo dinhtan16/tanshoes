@@ -105,7 +105,7 @@ const Search = () => {
       )}
       onClickOutside={handleTooltip}
     >
-      <div class=" flex items-center">
+      <div class=" flex lg:items-center max-w-[550px]">
         <div class="relative search">
           <input
             ref={inputRef}

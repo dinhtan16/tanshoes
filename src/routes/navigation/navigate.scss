@@ -7,4 +7,21 @@
     
     
   }
- 
+ @media screen and (min-width :994px) {
+  .cart-icon{
+    display: block;
+  }
+  .navbar-nav{
+    margin-top: 0px;
+  }
+  
+ }
+ @media screen and (max-width :994px) {
+  .cart-icon{
+    display: none;
+  }
+  .navbar-nav{
+    margin-top: 2rem;
+  }
+  
+ }
