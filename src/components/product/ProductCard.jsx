@@ -6,7 +6,9 @@ import { useContext } from "react";
 import { toast } from "react-toastify";
 import { RiHeartAddLine } from "react-icons/ri";
 import { CartContext } from "../../context/CartContext";
+
 import Col from "react-bootstrap/esm/Col";
+
 
 const ProductCard = ({ item }) => {
   const { categories, ID, productName, productPrice, url, sizeCheck } = item;
@@ -35,6 +37,7 @@ const ProductCard = ({ item }) => {
       theme: "light",
     });
   };
+
   return (
     <>
       <Col lg="3" md="6" xs="12" sm="6">
@@ -43,7 +46,7 @@ const ProductCard = ({ item }) => {
             <img
               src={url}
               alt=""
-              className="lg:h-[300px] hover:scale-110 transition-all"
+              className="lg:h-[300px] hover:scale-110 transition-all img-card"
             />
             <div className="product-price w-auto absolute top-0  text-left px-2 py-1 left-2 bg-white text-black font-light">
               {productPrice}$

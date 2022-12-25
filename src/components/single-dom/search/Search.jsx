@@ -8,7 +8,7 @@ import { getDocs, collection ,query} from "firebase/firestore";
 import { db } from "../../../utils/firebase/firebase";
 import SearchItem from "./SearchItem/SearchItem";
 
-const Search = () => {
+const Search = ({navOpen,setNavOpen}) => {
   const [searchResult, setSearchResult] = useState([]);
   const [value, setValue] = useState("");
   const [hideToolTip, setToolTip] = useState(true);
@@ -87,6 +87,7 @@ const Search = () => {
                     localStorage.setItem("productDetail", JSON.stringify(item));
                     setValue("");
                     setSearchResult([]);
+                    setNavOpen(false)
                   }}
                 />
               );

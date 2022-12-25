@@ -41,6 +41,11 @@ const deleteItem = (cartItems, itemDelete) => {
 const storeCart = JSON.parse(localStorage.getItem("Cart"));
 const storeTotalCart = localStorage.getItem("total");
 
+
+const CART_TYPES = {
+  SET_CART_ITEMS : "SET_CART_ITEMS",
+  SET_CART_OPENS:"SET_CART_OPENS"
+}
 const INIT_STATE = {
   cartItems: storeCart ?? [],
   isOpen: false,
@@ -49,10 +54,15 @@ const INIT_STATE = {
 const cartReducer = (state, action) => {
   const { type, payload } = action;
   switch (type) {
-    case "SET_CART_ITEMS":
+    case CART_TYPES.SET_CART_ITEMS:
       return {
         ...state,
         ...payload, //(cartItems,total)
+      };
+      case CART_TYPES.SET_CART_OPENS:
+      return {
+        ...state,
+        isOpen:payload, 
       };
     default:
       throw new Error(`error ${type}`);
@@ -76,7 +86,7 @@ const CartProvider = ({ children }) => {
     localStorage.setItem("total", newTotalCart);
 
     dispatch({
-      type: "SET_CART_ITEMS",
+      type:CART_TYPES.SET_CART_ITEMS,
       payload: { cartItems: newCartItems, total: newTotalCart },
     });
   };
@@ -89,7 +99,9 @@ const CartProvider = ({ children }) => {
     const newCartItems = deleteItem(cartItems, itemDelete);
     updateCartItemsReducer(newCartItems);
   };
-
+const setIsOpen = (bool) => {
+  dispatch({type:CART_TYPES.SET_CART_OPENS,payload:bool})
+}
   // useEffect(() => {
   //   const totalCart = cartItems.reduce(
   //     (total, cartItem) =>
@@ -101,7 +113,7 @@ const CartProvider = ({ children }) => {
   // }, [cartItems]);
   const value = {
     isOpen,
-    setIsOpen: () => {},
+    setIsOpen,
     cartItems,
     addItemToCart,
     deleteItemToCart,

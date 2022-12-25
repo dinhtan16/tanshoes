@@ -20,10 +20,29 @@ export default function SlideProducts() {
       <Container fluid>
         <Row>
           <Col md="6" className="font-extrabold text-3xl py-4">Still interested?</Col>
-          <Col md="12" lg='12'>
+          <Col>
             <Swiper
-              slidesPerView={4}
+              slidesPerView={5}
               spaceBetween={20}
+              breakpoints={{
+                // when window width is >= 640px
+                0: {
+                  slidesPerView: 1,
+                },
+                480: {
+                  slidesPerView: 2,
+                },
+                640: {
+                  slidesPerView: 3,
+                },
+                // when window width is >= 768px
+                768: {
+                  slidesPerView: 4,
+                },
+                1024: {
+                  slidesPerView: 5,
+                },
+              }}
               pagination={{
                 clickable: true,
               }}
@@ -36,10 +55,10 @@ export default function SlideProducts() {
               modules={[Pagination,Navigation,Autoplay]}
               className="mySwiper"
             >
-              <SwiperSlide>
+              <SwiperSlide className="item-slide">
                 <img src={adidas} alt="" />
               </SwiperSlide>
-              <SwiperSlide><img src={adidas} alt="" /></SwiperSlide>
+              <SwiperSlide className="item-slide"><img src={adidas} alt="" /></SwiperSlide>
               <SwiperSlide><img src={adidas} alt="" /></SwiperSlide>
               <SwiperSlide><img src={adidas} alt="" /></SwiperSlide>
               <SwiperSlide><img src={adidas} alt="" /></SwiperSlide>

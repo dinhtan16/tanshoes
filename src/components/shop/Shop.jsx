@@ -7,23 +7,22 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-
 import ProductCard from "../product/ProductCard";
 import ReactPaginate from "react-paginate";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from 'react-bootstrap/Col'
+import Col from "react-bootstrap/Col";
 
-
+import Loading from "../loading/Loading";
 
 const Shop = () => {
-
   const { products } = useContext(ProductsContext);
   const [categories, setCategories] = React.useState("");
   const [price, setPrice] = React.useState("");
-  const [value, setValue] = useState('');
-  
+  const [value, setValue] = useState("");
+  const [loading, setLoading] = useState(false);
+
   //paginate
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
@@ -32,10 +31,10 @@ const Shop = () => {
 
   let dataRender;
   if (categories.length > 0) {
-      dataRender = categories;
+    dataRender = categories;
   } else {
-      dataRender = products;
-  };
+    dataRender = products;
+  }
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -49,35 +48,50 @@ const Shop = () => {
     const newOffset = (event.selected * itemPerPage) % dataRender.length;
     setItemOffset(newOffset);
     window.scrollTo(0, 0);
-
   };
-    const handleChange =(e)=>{
-      setCategories(e.target.value)
-      const categorySelected = e.target.value
-      setValue(categorySelected)
-      if (categorySelected === 'All') {
-        setCategories(products);
-
+  const handleChange = (e) => {
+    setCategories(e.target.value);
+    const categorySelected = e.target.value;
+    setValue(categorySelected);
+    if (categorySelected === "All") {
+      setCategories(products);
     } else {
-        const filterData = products.filter(
-            (product) => product.categories.toLowerCase() === categorySelected.toLowerCase(),
-        );
-        setCategories(filterData);
+      const filterData = products.filter(
+        (product) =>
+          product.categories.toLowerCase() === categorySelected.toLowerCase()
+      );
+      setCategories(filterData);
     }
     setItemOffset(0);
-  }
-    const handleChangePrice =(e)=>{
-      setPrice(e.target.value)
-  }
+  };
+  const handleChangePrice = (e) => {
+    setPrice(e.target.value);
+  };
 
-  return (
+
+  useEffect(() => {
+    setLoading(true);
+    let loadingTime = setTimeout(() => {
+      setLoading(false);
+    }, 900);
+    return () => {
+      clearTimeout(loadingTime)
+    }
+  }, []);
+  return loading ? (
+   <div> <Loading /></div>
+  ) : (
     <Container>
-    <Row>
-        <Col lg='12' xs='12' md='12'>
+      <Row>
+        <Col lg="12" xs="12" md="12">
           <div className="my-6 px-8 flex gap-4 items-center flex-wrap" id="12">
-            <div className="filter-categories" lg='6'>
+            <div className="filter-categories" lg="6">
               <Box sx={{ minWidth: 100 }}>
-                <FormControl size="small" className="w-[200px] lg:w-[300px]" lg='6'>
+                <FormControl
+                  size="small"
+                  className="w-[200px] lg:w-[300px]"
+                  lg="6"
+                >
                   <InputLabel id="demo-simple-select-label">
                     Filter by Categories
                   </InputLabel>
@@ -96,7 +110,6 @@ const Shop = () => {
                     <MenuItem value={"Slides"}>Slides</MenuItem>
                     <MenuItem value={"WomanShoes"}>Womans</MenuItem>
                     <MenuItem value={"Global"}>Global</MenuItem>
-
                   </Select>
                 </FormControl>
               </Box>
@@ -124,20 +137,18 @@ const Shop = () => {
             </div>
           </div>
         </Col>
-  
+
         <Row>
-            {currentItems.map((item) => {
-              return (
-                <>
-                      
-                    <ProductCard item={item} key={item.ID} />
-                
-                </>
-              );
-            })}
+          {currentItems.map((item) => {
+            return (
+              <>
+                <ProductCard item={item} key={item.ID} />
+              </>
+            );
+          })}
         </Row>
-  
-        <Col lg='12'>
+
+        <Col lg="12">
           <ReactPaginate
             breakLabel="..."
             nextLabel="next >"
@@ -152,7 +163,8 @@ const Shop = () => {
             nextLinkClassName="next"
           />
         </Col>
-    </Row>
+      </Row>
     </Container>
-)}
+  );
+};
 export default Shop;

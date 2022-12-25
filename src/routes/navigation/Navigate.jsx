@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useState } from "react";
 import "./navigate.scss";
 import { useNavigate } from "react-router-dom";
 import { NavLink, Outlet } from "react-router-dom";
@@ -12,18 +12,18 @@ import CartIcon from "../../components/cart.components/cart-icon/CartIcon";
 import { CartContext } from "../../context/CartContext";
 import Search from "../../components/single-dom/search/Search";
 
-import { FaBars } from "react-icons/fa";
-import { AiOutlineUser, AiOutlineLogout } from "react-icons/ai";
-import { BiLogInCircle } from "react-icons/bi";
-import { CgAdidas } from "react-icons/cg";
+// import { FaBars } from "react-icons/fa";
+import { AiOutlineUser } from "react-icons/ai";
+// import { BiLogInCircle } from "react-icons/bi";
+// import { CgAdidas } from "react-icons/cg";
 
 import TextTransition, { presets } from "react-text-transition";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+// import Button from "react-bootstrap/Button";
+// import Container from "react-bootstrap/Container";
+// import Form from "react-bootstrap/Form";
+// import Nav from "react-bootstrap/Nav";
+// import Navbar from "react-bootstrap/Navbar";
+// import NavDropdown from "react-bootstrap/NavDropdown";
 
 const TEXTS = [
   "FREE SHIPPING FOR ADICLUB MEMBERS",
@@ -35,7 +35,6 @@ const Navigate = () => {
   const { setCartItems } = useContext(CartContext);
   const { isOpen } = useContext(CartContext);
 
-  const [toggle, setToggle] = useState(false);
 
   // const barRef = useRef(null);
   // const navMobile = useRef(null);
@@ -139,7 +138,7 @@ const Navigate = () => {
       </div>
       <nav className="navbar navbar-expand-lg sticky-top navbar-light bg-light">
         <div className="container-fluid">
-          <NavLink className="navbar-brand font-extrabold text-2xl" to="/"   onClick={toggleNav}> 
+          <NavLink className="navbar-brand font-extrabold text-2xl" to="/"   onClick={() => setNavOpen(false)}> 
             Adidos
           </NavLink>
       <div className="flex items-center gap-4">
@@ -168,7 +167,7 @@ const Navigate = () => {
             <ul className="navbar-nav gap-8 lg:ml-8 flex lg:items-center flex-shrink-0 underline">
               {Links.map(({ to, id, name }) => (
                 <NavLink
-                  onClick={toggleNav}
+                  onClick={() => setNavOpen(false)}
                   to={to}
                   key={id}
                   className={(navData) =>
@@ -218,7 +217,7 @@ const Navigate = () => {
               </div>
             </ul>
             <div className=" flex items-center gap-2">
-            <Search />
+            <Search nav={navOpen} setnav={setNavOpen}/>
         
             <button className="cart-icon">
                 <CartIcon />
