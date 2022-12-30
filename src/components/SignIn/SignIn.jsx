@@ -40,14 +40,6 @@ const SignIn = () => {
     event.preventDefault();
     try {
       const { user } = await signInWithEmailPassword(email, password);
-      // console.log(user)
-      // setCurrentUser(user)
-      // onAuthStateChangeListener(user)
-      // .then((res) => {
-      //   console.log(res.data())
-      // })
-      // const get = localStorage.getItem('users')
-      // console.log(get)
       toast.success(`Welcome ${user?.email}`, {
         position: "top-center",
         autoClose: 2000,

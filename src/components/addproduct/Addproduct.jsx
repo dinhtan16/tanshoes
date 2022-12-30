@@ -147,7 +147,6 @@ export const AddProducts = () => {
           id="type"
           onChange={(e) => {
             setCategories(e.target.value);
-            console.log(e.target.value);
           }}
         >
           <option disabled selected hidden>

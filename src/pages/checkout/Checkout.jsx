@@ -11,11 +11,13 @@ import {AiOutlinePlus} from 'react-icons/ai'
 
 import paymentImg from '../../assets/payment.jpg'
 import Loading from "../../components/loading/Loading";
+import { useSelector } from "react-redux";
 
 const Checkout = () => {
   const navigate = useNavigate();
   const { cartItems, deleteItemToCart, addItemToCart, total} = useContext(CartContext);
-  const {currentUser} =useContext(userContext)
+  // const {currentUser} =useContext(userContext)
+  const currentUser = useSelector(state => state.user.currentUser)
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {

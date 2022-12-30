@@ -1,8 +1,8 @@
 import React from "react";
-import { useState,useContext } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { userContext } from "../../context/UserContext";
+// import { userContext } from "../../context/UserContext";
 
 import { toast } from "react-toastify";
 
@@ -19,11 +19,13 @@ import { Input } from "../single-dom/Input";
 import ClubContent from "../single-dom/ClubContent/ClubContent";
 
 
-
+import { setCurrentUser } from "../../store/users/userSlice";
+import { useDispatch } from "react-redux";
 
 const Signup = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { setCurrentUser } = useContext(userContext);
+  // const { setCurrentUser } = useContext(userContext);
   const formFieldInit = {
     displayName: "",
     email: "",
@@ -64,7 +66,7 @@ const Signup = () => {
         email,
         password
       );
-      setCurrentUser(user);
+      dispatch(setCurrentUser(user));
       createUserDoc(user, { displayName });
       toast.success("Sign up success", {
         position: "top-right",

@@ -6,20 +6,20 @@ import {BrowserRouter} from 'react-router-dom'
 import UserProvider from './context/UserContext';
 import ProductsProvider from './context/ProductsContext';
 import DropdownProvider from './context/CartContext';
-import store from './store/store';
+import {store} from './store/store';
 import { Provider } from "react-redux";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter> 
     <Provider store={store}>
-            <UserProvider>
+            {/* <UserProvider> */}
                 <ProductsProvider>
                   <DropdownProvider>  
                       <App />
                   </DropdownProvider>
                   </ProductsProvider>
-              </UserProvider>
+              {/* </UserProvider> */}
     </Provider>
         </BrowserRouter>
       

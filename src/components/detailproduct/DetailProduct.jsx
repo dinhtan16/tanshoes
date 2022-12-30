@@ -34,7 +34,6 @@ const DetailProduct = () => {
   const { products } = useContext(ProductsContext);
   const { addItemToCart,setIsOpen } = useContext(CartContext);
   const productDetailStorage = JSON.parse(localStorage.getItem('productDetail'));
-  console.log(Array(productDetailStorage))
   const product = products?.find((item) => item.ID === id);
   const {
     productPrice,
@@ -64,7 +63,7 @@ const DetailProduct = () => {
     <>
       <div className="flex mx-auto px-4 mt-8 gap-4 md:flex-col flex-col lg:flex-row md:justify-center justify-center md:items-center items-center lg:items-start">
         <div className="product-img w-full lg:w-[65%]">
-                  <div className="mb-4 ">
+                  <div className="mb-4 flex justify-center items-center">
                     <img src={url} alt="none" />
                   </div>
           {/* <Swiper navigation={true} modules={[Navigation]} className='max-w-[100%]'>

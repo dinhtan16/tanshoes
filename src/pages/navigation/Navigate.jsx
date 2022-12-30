@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import "./navigate.scss";
 import { useNavigate } from "react-router-dom";
 import { NavLink, Outlet } from "react-router-dom";
-import { userContext } from "../../context/UserContext";
 import { signOutUser } from "../../utils/firebase/firebase";
 import { toast } from "react-toastify";
 import ReactTooltip from "react-tooltip";
@@ -12,18 +11,12 @@ import CartIcon from "../../components/cart.components/cart-icon/CartIcon";
 import { CartContext } from "../../context/CartContext";
 import Search from "../../components/single-dom/search/Search";
 
-// import { FaBars } from "react-icons/fa";
 import { AiOutlineUser } from "react-icons/ai";
-// import { BiLogInCircle } from "react-icons/bi";
-// import { CgAdidas } from "react-icons/cg";
+
 
 import TextTransition, { presets } from "react-text-transition";
-// import Button from "react-bootstrap/Button";
-// import Container from "react-bootstrap/Container";
-// import Form from "react-bootstrap/Form";
-// import Nav from "react-bootstrap/Nav";
-// import Navbar from "react-bootstrap/Navbar";
-// import NavDropdown from "react-bootstrap/NavDropdown";
+import { useSelector } from "react-redux";
+
 
 const TEXTS = [
   "FREE SHIPPING FOR ADICLUB MEMBERS",
@@ -31,13 +24,11 @@ const TEXTS = [
   "SHARE YOUR HOLIDAY SPIRIT",
 ];
 const Navigate = () => {
-  const { currentUser } = useContext(userContext);
+  const currentUser = useSelector((state) => state.user.currentUser)
   const { setCartItems } = useContext(CartContext);
   const { isOpen } = useContext(CartContext);
 
 
-  // const barRef = useRef(null);
-  // const navMobile = useRef(null);
   const [navOpen, setNavOpen] = useState(false);
 
   function toggleNav() {
@@ -75,7 +66,6 @@ const Navigate = () => {
   const signOutHandler = async () => {
     setNavOpen((state) => !state);
     await signOutUser();
-    //  setCurrentUser(null)
     localStorage.clear();
     setCartItems([]);
     navigate("/account");
@@ -88,26 +78,7 @@ const Navigate = () => {
       theme: "light",
     });
   };
-  // const [stickyClass, setStickyClass] = useState("relative");
-
-  // useEffect(() => {
-  //   window.addEventListener("scroll", stickNavbar);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", stickNavbar);
-  //   };
-  // }, []);
-
-  // const stickNavbar = () => {
-  //   if (window !== undefined) {
-  //     let windowHeight = window.scrollY;
-  //     windowHeight > 80
-  //       ? setStickyClass(
-  //           "fixed top-0 left-0 z-50  right-0 w-full px-4 bg-white"
-  //         )
-  //       : setStickyClass("relative");
-  //   }
-  // };
+ 
 
   const [index, setIndex] = React.useState(0);
 
@@ -119,13 +90,7 @@ const Navigate = () => {
     return () => clearTimeout(intervalId);
   }, []);
 
-  //handleNav
-  // const showNavbar = () => {
-  //   navMobile.current.classList.toggle('active')
-  // }
-  // const closeNav = () => {
-  //   navMobile.current.classList.remove('active')
-  // }
+
 
   return (
     <>
@@ -186,7 +151,7 @@ const Navigate = () => {
                   <NavLink
                     to="/user"
                     className="uppercase hover:text-red-500"
-                    data-tip="Your account"
+                    data-tip={currentUser?.email}
                     data-place="bottom"
                   >
                     <ReactTooltip />
