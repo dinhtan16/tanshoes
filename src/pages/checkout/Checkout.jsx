@@ -33,6 +33,9 @@ const Checkout = () => {
       clearTimeout(loadingTime)
     }
   }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const handleAuth = () => {
     toast.warning(`You must Login, directing you to Login Page`, {
       position: "top-center",
@@ -58,16 +61,16 @@ const Checkout = () => {
    loading ? <Loading /> : (
     <>
     <div className="max-w-[1200px] w-full mx-auto flex gap-8 md:flex-row lg:flex-row flex-col ">
-      <div className="flex-shrink-0 lg:w-[70%] md:w-[60%] w-[100%]">
-        <>
-          <h1>GIỎ HÀNG CỦA TÔI</h1>
+      <div className="flex-shrink-0 lg:w-[70%] md:w-[60%] w-[100%] mt-8 px-2">
+      
+          <span className="text-2xl font-bold">GIỎ HÀNG CỦA TÔI</span>
           <div className="font-bold mt-2">
             Tổng : {total}$
           </div>
           <p>
             Các sản phẩm hiện chưa được xác nhận, vui lòng thanh toán để sở hữu ngay.
           </p>
-        </>
+    
         <div>
           <div>
             {cartItems.length === 0 && (
@@ -121,7 +124,7 @@ const Checkout = () => {
         </div>
       </div>
 
-      <div className="flex-1 mt-8 flex flex-col gap-4">
+      <div className="flex-1 mt-8 flex flex-col gap-4 px-2">
       
         <div className="">
           <div className="border p-4 summary">
