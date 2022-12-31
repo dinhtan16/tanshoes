@@ -2,20 +2,26 @@ import React from "react";
 import "./Product.modules.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+
+import { useDispatch,useSelector } from "react-redux";
+
 import { useContext } from "react";
 import { toast } from "react-toastify";
 import { RiHeartAddLine } from "react-icons/ri";
 import { CartContext } from "../../context/CartContext";
 
 import Col from "react-bootstrap/esm/Col";
+import { addItem } from "../../store/cart/cartsSlice";
 
 
 const ProductCard = ({ item }) => {
   const { categories, ID, productName, productPrice, url, sizeCheck } = item;
-  const { addItemToCart } = useContext(CartContext);
+  // const { addItemToCart } = useContext(CartContext);
   const [selectedSize, setSelectedSize] = useState(null);
-  const [cartItem, setCartItem] = useState(null);
+  // const [cartItem, setCartItem] = useState(null);
 
+  // const cartItem = useSelector(state => state.cart.cartItems)
+  const dispatch = useDispatch()
   const addProductToCart = () => {
 
     toast.success(`Added to your cart!`, {
@@ -25,7 +31,9 @@ const ProductCard = ({ item }) => {
       progress: undefined,
       theme: "light",
     });
-    addItemToCart(item, cartItem)
+    // addItemToCart(item, cartItem)
+    // console.log(selectedSize)
+    dispatch(addItem({...item,selectedSize:selectedSize}))
     setSelectedSize(null)
   };
   const handleSizeAlert = () => {
@@ -78,7 +86,7 @@ const ProductCard = ({ item }) => {
                       <button
                             onClick={() => {
                               setSelectedSize(item);
-                              setCartItem(item)
+                              // setCartItem(item)
                             }}
                           >
                             {item}

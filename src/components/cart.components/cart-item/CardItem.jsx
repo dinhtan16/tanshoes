@@ -1,13 +1,15 @@
 import React from 'react'
-import { useContext } from 'react'
 import {FaTimes} from 'react-icons/fa'
-import { CartContext } from '../../../context/CartContext'
+
+import { useDispatch } from 'react-redux';
+import { deleteItem } from '../../../store/cart/cartsSlice';
 const CardItem = ({item}) => {
     const {  productPrice, productName, url } = item;
 
     // const {imgUrl,name,price} = item
-    const {deleteItemToCart} = useContext(CartContext)
-    const deleteItem = () => deleteItemToCart(item)
+    // const {deleteItemToCart} = useContext(CartContext)
+    // const deleteItem = () => deleteItemToCart(item)
+    const dispatch=useDispatch()
   return (
    <>
    <div className='flex justify-between items-center mt-6 px-4 z-10'>
@@ -23,7 +25,7 @@ const CardItem = ({item}) => {
     </div>
     <div className="item-right flex items-center gap-4">
         <div className="price">{productPrice}$</div>
-        <div className="delete cursor-pointer" onClick={deleteItem} ><FaTimes/></div>
+        <div className="delete cursor-pointer" onClick={() => dispatch(deleteItem(item))} ><FaTimes/></div>
     </div>
  
 </div>

@@ -1,6 +1,8 @@
 import React from "react";
 import { useContext,useState } from "react";
 import { useParams,useNavigate } from "react-router-dom";
+
+
 import { ProductsContext } from "../../context/ProductsContext";
 import { CartContext } from "../../context/CartContext";
 import './productcate.scss'
@@ -25,13 +27,14 @@ import 'react-accessible-accordion/dist/fancy-example.css';
 import { TbTruckDelivery, TbExchange } from "react-icons/tb";
 import {BsArrowRight} from 'react-icons/bs'
 import {FaRegHeart}  from 'react-icons/fa'
+import { useSelector } from "react-redux";
 
 const DetailProduct = () => {
   const navigate = useNavigate()
   const { id } = useParams();
   const [selectedSize, setSelectedSize] = useState(null);
 
-  const { products } = useContext(ProductsContext);
+  const products = useSelector(state => state.product.products)
   const { addItemToCart,setIsOpen } = useContext(CartContext);
   const productDetailStorage = JSON.parse(localStorage.getItem('productDetail'));
   const product = products?.find((item) => item.ID === id);

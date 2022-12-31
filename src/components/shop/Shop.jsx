@@ -16,8 +16,21 @@ import Col from "react-bootstrap/Col";
 
 import Loading from "../loading/Loading";
 
+
+
+
+import {useSelector,useDispatch} from 'react-redux'
+import {getProducts} from '../../store/products/productSlice'
+
+
 const Shop = () => {
-  const { products } = useContext(ProductsContext);
+  // const { products } = useContext(ProductsContext);
+  const dispatch=useDispatch()
+  useEffect(() => {
+		dispatch(getProducts())
+	}, [dispatch])
+  const products = useSelector(state => state.product.products)
+  // console.log(productss)
   const [categories, setCategories] = React.useState("");
   const [price, setPrice] = React.useState("");
   const [value, setValue] = useState("");
@@ -141,9 +154,9 @@ const Shop = () => {
         <Row>
           {currentItems.map((item) => {
             return (
-              <>
+              
                 <ProductCard item={item} key={item.ID} />
-              </>
+              
             );
           })}
         </Row>

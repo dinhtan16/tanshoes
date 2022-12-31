@@ -1,22 +1,26 @@
 import React,{useState,useEffect} from "react";
-import { useContext } from "react";
+// import { useContext } from "react";
 import { useNavigate,Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import {userContext} from '../../context/UserContext'
-import { CartContext } from "../../context/CartContext";
+// import { CartContext } from "../../context/CartContext";
 
 import { BsArrowRight } from "react-icons/bs";
 import {AiOutlinePlus} from 'react-icons/ai'
 
 import paymentImg from '../../assets/payment.jpg'
 import Loading from "../../components/loading/Loading";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+import { addItem,deleteItem } from "../../store/cart/cartsSlice";
 
 const Checkout = () => {
   const navigate = useNavigate();
-  const { cartItems, deleteItemToCart, addItemToCart, total} = useContext(CartContext);
+  const dispatch = useDispatch()
+  // const { cartItems, deleteItemToCart, addItemToCart, total} = useContext(CartContext);
   // const {currentUser} =useContext(userContext)
+  const cartItems = useSelector(state => state.cart.cartItems)
+  const total = useSelector(state => state.cart.totalAmount)
+
   const currentUser = useSelector(state => state.user.currentUser)
   const [loading, setLoading] = useState(false);
 
@@ -57,12 +61,8 @@ const Checkout = () => {
       <div className="flex-shrink-0 lg:w-[70%] md:w-[60%] w-[100%]">
         <>
           <h1>YOUR BAG</h1>
-          <div className="font-light mt-2">
-            TOTAL :{" "}
-            {cartItems.length > 1
-              ? cartItems.length + " items"
-              : cartItems.length + " item"}{" "}
-            - <span className="font-bold text-lg">{total}$</span>
+          <div className="font-bold mt-2">
+            TOTAL : {total}$
           </div>
           <p>
             Items in your bag are not reserved — check out now to make them
@@ -100,14 +100,14 @@ const Checkout = () => {
                       <div className="flex gap-6 items-center">
                         <span
                           className="text-3xl bg-black text-white w-[40px] text-center cursor-pointer"
-                          onClick={() => deleteItemToCart(item)}
+                          onClick={() => dispatch(deleteItem(item))}
                         >
                           -
                         </span>
                         <span className="text-xl">{item.quantity}</span>
                         <span
                           className="text-3xl bg-black text-white w-[40px] text-center cursor-pointer"
-                          onClick={() => addItemToCart(item,item.selectedSize)}
+                          onClick={() => dispatch(addItem({...item}))}
                         >
                           +
                         </span>

@@ -15,8 +15,9 @@ import { AiOutlineUser } from "react-icons/ai";
 
 
 import TextTransition, { presets } from "react-text-transition";
-import { useSelector } from "react-redux";
 
+import { useSelector,useDispatch } from "react-redux";
+import { setCartOpen } from "../../store/cart/cartsSlice";
 
 const TEXTS = [
   "FREE SHIPPING FOR ADICLUB MEMBERS",
@@ -24,10 +25,12 @@ const TEXTS = [
   "SHARE YOUR HOLIDAY SPIRIT",
 ];
 const Navigate = () => {
-  const currentUser = useSelector((state) => state.user.currentUser)
-  const { setCartItems } = useContext(CartContext);
-  const { isOpen } = useContext(CartContext);
+const dispatch =useDispatch()
 
+  const currentUser = useSelector((state) => state.user.currentUser)
+  // const { setCartItems } = useContext(CartContext);
+  // const { isOpen } = useContext(CartContext); 
+  const isOpen = useSelector(state => state.cart.isOpen)
 
   const [navOpen, setNavOpen] = useState(false);
 
@@ -67,7 +70,7 @@ const Navigate = () => {
     setNavOpen((state) => !state);
     await signOutUser();
     localStorage.clear();
-    setCartItems([]);
+    dispatch(setCartOpen(false));
     navigate("/account");
     toast.success(`Sign Out success`, {
       position: "bottom-center",

@@ -1,12 +1,18 @@
-import React, { useContext } from 'react'
-import { CartContext } from '../../../context/CartContext'
+import React from 'react'
 
 import { ReactComponent as ShoppingCart } from '../../../assets/shopping-bag.svg'
-const CartIcon = () => {
-    const {isOpen,setIsOpen,cartItems} = useContext(CartContext)
+import { useDispatch,useSelector } from 'react-redux'
+import { setCartOpen } from '../../../store/cart/cartsSlice'
 
+const CartIcon = () => {
+    const dispatch = useDispatch()
+
+    const isOpen = useSelector(state => state.cart.isOpen) 
+  
+    const cartItems = useSelector(state => state.cart.cartItems)
+  
     const handleOpen = () =>{
-        setIsOpen(!isOpen)
+        dispatch(setCartOpen(!isOpen))
     
     }
   return (
