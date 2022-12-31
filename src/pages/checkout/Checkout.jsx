@@ -60,13 +60,12 @@ const Checkout = () => {
     <div className="max-w-[1200px] w-full mx-auto flex gap-8 md:flex-row lg:flex-row flex-col ">
       <div className="flex-shrink-0 lg:w-[70%] md:w-[60%] w-[100%]">
         <>
-          <h1>YOUR BAG</h1>
+          <h1>GIỎ HÀNG CỦA TÔI</h1>
           <div className="font-bold mt-2">
-            TOTAL : {total}$
+            Tổng : {total}$
           </div>
           <p>
-            Items in your bag are not reserved — check out now to make them
-            yours.
+            Các sản phẩm hiện chưa được xác nhận, vui lòng thanh toán để sở hữu ngay.
           </p>
         </>
         <div>
@@ -74,12 +73,12 @@ const Checkout = () => {
             {cartItems.length === 0 && (
               <div>
                 {" "}
-                No item is here, let{" "}
+                oops, chưa có sản phẩm nào cả, cùng{" "}
                 <span
                   className="text-lg font-bold underline pl-1 cursor-pointer hover:text-sky-400   "
                   onClick={() => navigate("/shop")}
                 >
-                  Shopping
+                  Shopping nào
                 </span>
               </div>
             )}
@@ -126,24 +125,22 @@ const Checkout = () => {
       
         <div className="">
           <div className="border p-4 summary">
-            <h1 className="uppercase font-extrabold">Order Summary</h1>
+            <h1 className="uppercase font-extrabold">Tóm tắt đơn hàng</h1>
             <div className="flex justify-between">
               <div className="right flex flex-col gap-2">
                 <div className="font-light mt-2">
-                  {cartItems.length > 1
-                    ? cartItems.length + " items"
-                    : cartItems.length + " item"}{" "}
+                {cartItems.length } sản phẩm
                 </div>
-                <p className="p-0 m-0 font-light">DELIVERY</p>
-                <p className="font-bold p-0 m-0">TOTAL</p>
+                <p className="p-0 m-0 font-light">Phí giao hàng</p>
+                <p className="font-bold p-0 m-0">Tổng tiền</p>
                 <p className="p-0 m-0 text-sm font-light">
-                  (inclusive of tax 13$)
+                  (Bao gồm 13$ tax)
                 </p>
               </div>
               <div className="left flex flex-col gap-2">
                 <span className="font-bold text-lg">{total}$</span>
                 <div>
-                  <p className="p-0 m-0">FREE</p>
+                  <p className="p-0 m-0">Miễn phí</p>
                 </div>
                 <div>
                   <p className="font-bold p-0 m-0">{total + 13}$</p>
@@ -152,7 +149,7 @@ const Checkout = () => {
             </div>
           </div>
             <div className="promo relative">
-              <input type="text" placeholder="Enter Promo Code Here..." className="outline-none focus:ring-1"/>
+              <input type="text" placeholder="Nhập mã giảm giá tại đây..." className="outline-none focus:ring-1"/>
              <div className="right-4 absolute top-6"> <AiOutlinePlus /></div>
             </div>
             <div className="payment mt-4 text-left">
@@ -165,14 +162,14 @@ const Checkout = () => {
           currentUser ? (
               cartItems.length > 0 ? (
                 <button onClick={() => navigate('/billing')} className="bg-black  flex items-center gap-2 justify-center text-white uppercase w-full h-[50px] font-bold">
-                check out{" "}
+                Thanh toán{" "}
                 <span className="text-2xl">
                   <BsArrowRight />
                 </span>
               </button>
               ) : (
                 <button onClick={handleCart} className="bg-black  flex items-center gap-2 justify-center text-white uppercase w-full h-[50px] font-bold">
-                check out{" "}
+                Thanh toán{" "}
                 <span className="text-2xl">
                   <BsArrowRight />
                 </span>
@@ -182,14 +179,14 @@ const Checkout = () => {
             
           cartItems.length > 0 ? (
             <button onClick={handleAuth} className="bg-black  flex items-center gap-2 justify-center text-white uppercase w-full h-[50px] font-bold">
-            check out{" "}
+            Thanh toán{" "}
             <span className="text-2xl">
               <BsArrowRight />
             </span>
           </button>
           ) : (
             <button onClick={handleCart} className="bg-black  flex items-center gap-2 justify-center text-white uppercase w-full h-[50px] font-bold">
-            check out{" "}
+            Thanh toán{" "}
             <span className="text-2xl">
               <BsArrowRight />
             </span>

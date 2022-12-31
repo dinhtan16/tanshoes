@@ -24,7 +24,7 @@ const ProductCard = ({ item }) => {
   const dispatch = useDispatch()
   const addProductToCart = () => {
 
-    toast.success(`Added to your cart!`, {
+    toast.success(`Đã thêm vào giỏ hàng!`, {
       position: "bottom-center",
       autoClose: 300,
       hideProgressBar: true,
@@ -37,7 +37,7 @@ const ProductCard = ({ item }) => {
     setSelectedSize(null)
   };
   const handleSizeAlert = () => {
-    toast.warning(`Please select size first !`, {
+    toast.warning(`Vui lòng chọn size trước !`, {
       position: "top-center",
       autoClose: 300,
       hideProgressBar: true,

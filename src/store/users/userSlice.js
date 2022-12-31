@@ -9,7 +9,6 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setCurrentUser(state, action) {
-      // ✅ This "mutating" code is okay inside of createSlice!
       return {
         ...state,
         currentUser:action.payload,

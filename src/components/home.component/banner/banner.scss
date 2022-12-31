@@ -3,6 +3,10 @@
     display: flex;
     flex-direction:column;
     gap:20px;
+
+    a:hover{
+        color:#aeabab !important;
+    }
  }
 .btn-shop{
     align-items: center;
@@ -18,8 +22,8 @@
     width: 155px;
 }
 .bgr-banner,.bgr-banner-2{
-    background-image: url('../../../assets/banner.jpg');
-    background-position: 69%;
+    background-image: url('../../../assets/adidas2023.jpg');
+    background-position: 100%;
     background-size: cover;
     background-repeat: no-repeat;
     // padding: 60px;
@@ -27,4 +31,8 @@
 .bgr-banner-2{
     background-image: url('../../../assets/banner2.jpg');
 
+}
+.header-nav{
+    display: flex !important;
+    justify-content: space-between !important;
 }

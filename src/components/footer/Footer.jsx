@@ -10,48 +10,46 @@ const Footer = () => {
           <div className="m-4">
             <h1>Products</h1>
             <div className="flex flex-col gap-2 font-light mt-2 nav-footer">
-              <Link to="/">Shoes</Link>
-              <Link to="/">Clothing</Link>
-              <Link to="/">New Arrival</Link>
+              <Link to="/">Nam</Link>
+              <Link to="/">Nữ</Link>
+              <Link to="/">Trẻ em</Link>
               <Link to="/">Outlet</Link>
             </div>
           </div>
           <div className="m-4 h-[200px]">
             <h1>SPORTS</h1>
             <div className="flex flex-col gap-2 font-light mt-2 nav-footer">
-              <Link to="/">Shoes</Link>
-              <Link to="/">Clothing</Link>
+              <Link to="/">Boost</Link>
+              <Link to="/">Quần áo</Link>
               <Link to="/">New Arrival</Link>
-              <Link to="/">Outlet</Link>
+
             </div>
           </div>
           <div className="m-4 h-[200px]">
             <h1>COLLECTIONS</h1>
             <div className="flex flex-col gap-2 font-light mt-2 nav-footer">
-              <Link to="/">Shoes</Link>
-              <Link to="/">Clothing</Link>
-              <Link to="/">New Arrival</Link>
+              <Link to="/">Mùa hè 2023</Link>
+              <Link to="/">Mùa thu 2023</Link>
+              <Link to="/">Mùa đông 2023</Link>
               <Link to="/">Outlet</Link>
             </div>
           </div>
           <div className="m-4">
             <h1 className="shrink-0">COMPANY INFO</h1>
             <div className="flex flex-col gap-2 font-light mt-2 nav-footer">
-              <Link to="/">Shoes</Link>
-              <Link to="/">Clothing</Link>
-              <Link to="/">New Arrival</Link>
-              <Link to="/">Outlet</Link>
-              <Link to="/">New Arrival</Link>
-              <Link to="/">Outlet</Link>
+              <Link to="/">Về chúng tôi</Link>
+              <Link to="/">Chính sách và thỏa thuận</Link>
+              <Link to="/">Cookies</Link>
+              <Link to="/">Cam kết</Link>
+
             </div>
           </div>
           <div className="m-4 h-[200px]">
             <h1>SUPPORT</h1>
             <div className="flex flex-col gap-2 font-light mt-2 nav-footer">
-              <Link to="/">Shoes</Link>
-              <Link to="/">Clothing</Link>
-              <Link to="/">New Arrival</Link>
-              <Link to="/">Outlet</Link>
+              <Link to="/">Gửi hỗ trợ</Link>
+              <Link to="/">Đăng kí nhận tin</Link>
+              <Link to="/">Ủng hộ fanpage</Link>
               <img src={footer} alt="none" className="max-w-[150px]"/>
             </div>
           </div>
@@ -59,9 +57,9 @@ const Footer = () => {
             <h1>FOLLOW US</h1>
             <div className="flex flex-col gap-2 font-light mt-2 nav-footer">
               <Link to="/">Facebook</Link>
-              <Link to="/">Twitter</Link>
-              <Link to="/">Shoppe</Link>
-              <Link to="/">Outlet</Link>
+              <Link to="/">0394700410</Link>
+              <Link to="/">Hoàng Đình Tấn</Link>
+              <Link to="/">Quận 12 - HCM</Link>
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import Footer from '../../pages/footer/Footer'
+import Footer from '../footer/Footer'
 import Navigate from '../../pages/navigation/Navigate'
 import Routes from '../../routes/Routes'
 

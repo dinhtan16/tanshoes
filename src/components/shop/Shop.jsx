@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { ProductsContext } from "../../context/ProductsContext";
+import React, { useEffect, useState } from "react";
+
 import "./shop.scss";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
@@ -16,21 +16,22 @@ import Col from "react-bootstrap/Col";
 
 import Loading from "../loading/Loading";
 
-
-
-
-import {useSelector,useDispatch} from 'react-redux'
-import {getProducts} from '../../store/products/productSlice'
-
+import { useSelector, useDispatch } from "react-redux";
+import { getProducts } from "../../store/products/productSlice";
 
 const Shop = () => {
-  // const { products } = useContext(ProductsContext);
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
+
   useEffect(() => {
-		dispatch(getProducts())
-	}, [dispatch])
-  const products = useSelector(state => state.product.products)
-  // console.log(productss)
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, []);
+
+  const products = useSelector((state) => state.product.products);
+
   const [categories, setCategories] = React.useState("");
   const [price, setPrice] = React.useState("");
   const [value, setValue] = useState("");
@@ -48,9 +49,7 @@ const Shop = () => {
   } else {
     dataRender = products;
   }
-  React.useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+
   useEffect(() => {
     const endOffset = itemOffset + itemPerPage;
     setCurrentItems(dataRender.slice(itemOffset, endOffset));
@@ -81,18 +80,20 @@ const Shop = () => {
     setPrice(e.target.value);
   };
 
-
   useEffect(() => {
     setLoading(true);
     let loadingTime = setTimeout(() => {
       setLoading(false);
     }, 900);
     return () => {
-      clearTimeout(loadingTime)
-    }
+      clearTimeout(loadingTime);
+    };
   }, []);
   return loading ? (
-   <div> <Loading /></div>
+    <div>
+      {" "}
+      <Loading />
+    </div>
   ) : (
     <Container>
       <Row>
@@ -153,11 +154,7 @@ const Shop = () => {
 
         <Row>
           {currentItems.map((item) => {
-            return (
-              
-                <ProductCard item={item} key={item.ID} />
-              
-            );
+            return <ProductCard item={item} key={item.ID} />;
           })}
         </Row>
 
