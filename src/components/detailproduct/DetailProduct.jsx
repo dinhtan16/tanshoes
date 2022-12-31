@@ -3,8 +3,7 @@ import { useContext,useState } from "react";
 import { useParams,useNavigate } from "react-router-dom";
 
 
-import { ProductsContext } from "../../context/ProductsContext";
-import { CartContext } from "../../context/CartContext";
+
 import './productcate.scss'
 import {toast} from 'react-toastify'
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -13,13 +12,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 
-import {
-  Accordion,
-  AccordionItem,
-  AccordionItemHeading,
-  AccordionItemButton,
-  AccordionItemPanel,
-} from 'react-accessible-accordion';
+import { useDispatch,useSelector } from "react-redux";
 
 // Demo styles, see 'Styles' section below for some notes on use.
 import 'react-accessible-accordion/dist/fancy-example.css';
@@ -27,16 +20,16 @@ import 'react-accessible-accordion/dist/fancy-example.css';
 import { TbTruckDelivery, TbExchange } from "react-icons/tb";
 import {BsArrowRight} from 'react-icons/bs'
 import {FaRegHeart}  from 'react-icons/fa'
-import { useSelector } from "react-redux";
+import { addItem, setCartOpen } from "../../store/cart/cartsSlice";
 
 const DetailProduct = () => {
   const navigate = useNavigate()
+  const dispatch=useDispatch()
   const { id } = useParams();
   const [selectedSize, setSelectedSize] = useState(null);
 
   const products = useSelector(state => state.product.products)
-  const { addItemToCart,setIsOpen } = useContext(CartContext);
-  const productDetailStorage = JSON.parse(localStorage.getItem('productDetail'));
+  const productDetailStorage = JSON.parse(localStorage.getItem('products'));
   const product = products?.find((item) => item.ID === id);
   const {
     productPrice,
@@ -49,7 +42,7 @@ const DetailProduct = () => {
     categories,
   } = product;
   const handleBuy = () => {
-     addItemToCart(product,selectedSize)
+     dispatch(addItem({...product,selectedSize:selectedSize}))
      toast.info(`Loading`, {
        position: "top-center",
        autoClose: 1000,
@@ -60,7 +53,7 @@ const DetailProduct = () => {
     setTimeout(() => {
       navigate('/checkout')
     },2000)
-    setIsOpen(false)
+    dispatch(setCartOpen(false))
   }
   return (
     <>
@@ -138,7 +131,7 @@ const DetailProduct = () => {
                 <button
                 className="bg-black text-white h-[50px] w-[70%] uppercase flex justify-center items-center gap-4 
                 transition-all tracking-normal font-bold px-5 py-3 cursor-pointer hover:bg-white hover:text-black hover:border border-black"
-              onClick={() => addItemToCart(product,selectedSize)}
+              onClick={() => dispatch(addItem({...product,selectedSize:selectedSize}))}
               >
                <span className="text-[15px]"> add to bag </span>
                <span className="text-[20px]"><BsArrowRight/></span>
