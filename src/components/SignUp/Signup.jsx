@@ -58,9 +58,20 @@ const Signup = () => {
         progress: undefined,
         theme: "light",
       });
+  
       return;
     }
-
+    if (password.length < 6) {
+      toast.error("Mật khẩu ít nhất 6 kí tự", {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    return
+  }
     try {
       const { user } = await createAuthUserWithEmailAndPassword(
         email,
@@ -82,7 +93,7 @@ const Signup = () => {
       navigate("/");
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
-        toast.error("email already in use", {
+        toast.error("Email đã tồn tại", {
           position: "top-right",
           autoClose: 4000,
           hideProgressBar: false,
@@ -93,7 +104,6 @@ const Signup = () => {
           theme: "light",
         });
       }
-      console.log(error);
     }
   };
 
