@@ -23,13 +23,15 @@
 }
 .bgr-banner,.bgr-banner-2{
     background-image: url('../../../assets/adidas2023.jpg');
-    background-position: 100%;
+    background-position: 97%;
+    background-attachment: scroll;
     background-size: cover;
     background-repeat: no-repeat;
     // padding: 60px;
 }
 .bgr-banner-2{
     background-image: url('../../../assets/banner2.jpg');
+    background-attachment: fixed;
 
 }
 .header-nav{

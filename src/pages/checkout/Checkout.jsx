@@ -146,7 +146,7 @@ const Checkout = () => {
                   <p className="p-0 m-0">Miễn phí</p>
                 </div>
                 <div>
-                  <p className="font-bold p-0 m-0">{total + 13}$</p>
+                  <p className="font-bold p-0 m-0">{Number(total) + 13}$</p>
                 </div>
               </div>
             </div>

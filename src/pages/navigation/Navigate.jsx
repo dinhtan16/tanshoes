@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, {  useState } from "react";
 import "./navigate.scss";
 import { useNavigate } from "react-router-dom";
 import { NavLink, Outlet } from "react-router-dom";
@@ -8,7 +8,6 @@ import ReactTooltip from "react-tooltip";
 
 import CartDropdown from "../../components/cart.components/cart-dropdown/CartDropdown";
 import CartIcon from "../../components/cart.components/cart-icon/CartIcon";
-import { CartContext } from "../../context/CartContext";
 import Search from "../../components/single-dom/search/Search";
 
 import { AiOutlineUser } from "react-icons/ai";

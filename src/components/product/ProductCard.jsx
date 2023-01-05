@@ -3,16 +3,15 @@ import "./Product.modules.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-import { useContext } from "react";
 import { toast } from "react-toastify";
 import { RiHeartAddLine } from "react-icons/ri";
-import { CartContext } from "../../context/CartContext";
 
 import Col from "react-bootstrap/esm/Col";
 import { addItem } from "../../store/cart/cartsSlice";
 
+import { ProductBody,ProductBodyBottom,ProductBodyTop,ProductSizeMap } from "./product.styledComponent";
 
 const ProductCard = ({ item }) => {
   const { categories, ID, productName, productPrice, url, sizeCheck } = item;
@@ -49,8 +48,8 @@ const ProductCard = ({ item }) => {
   return (
     <>
       <Col lg="3" md="6" xs="12" sm="6">
-        <div className=" text-left product-body h-full">
-          <div className="relative overflow-hidden product-body-top">
+        <ProductBody>
+          <ProductBodyTop>
             <img
               src={url}
               alt=""
@@ -72,7 +71,7 @@ const ProductCard = ({ item }) => {
               <div>{categories}</div>
             </div>
             <div className="product-size">
-              <div className="product-size-map">
+              <ProductSizeMap>
                 {sizeCheck.map((item, index) => {
                   return (
                     <div
@@ -94,15 +93,15 @@ const ProductCard = ({ item }) => {
                     </div>
                   );
                 })}
-              </div>
+              </ProductSizeMap>
             </div>
-          </div>
-          <div className="product-body-bottom">
+          </ProductBodyTop>
+          <ProductBodyBottom>
             <div>
               {selectedSize ? (
                 <button
                   className=" bg-black text-white w-[100px] h-[40px]
-                            mb-4 font-light text-[12px] uppercase lg:mt-2 md:mt-4 mt-4
+                            mb-4  text-[12px] uppercase lg:mt-2 md:mt-4 mt-4 font-normal
                             hover:bg-white hover:text-black transition-all hover:border hover:border-black
                             "
                   onClick={addProductToCart}
@@ -112,7 +111,7 @@ const ProductCard = ({ item }) => {
               ) : (
                 <button
                   className="bg-black text-white w-[100px] h-[40px]
-                            mb-4 font-light text-[12px] uppercase lg:mt-2 md:mt-4 mt-4
+                            mb-4 font-normal text-[12px] uppercase lg:mt-2 md:mt-4 mt-4
                             hover:bg-white hover:text-black transition-all hover:border hover:border-black
                             "
                   onClick={handleSizeAlert}
@@ -121,8 +120,8 @@ const ProductCard = ({ item }) => {
                 </button>
               )}
             </div>
-          </div>
-        </div>
+          </ProductBodyBottom>
+        </ProductBody>
       </Col>
     </>
   );
